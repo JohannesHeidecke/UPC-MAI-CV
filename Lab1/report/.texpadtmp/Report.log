@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 OCT 2016 15:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 OCT 2016 23:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -148,20 +148,106 @@ File: task6.png Graphic file (type png)
  <use task6.png>
 Package pdftex.def Info: task6.png used on input line 74.
 (pdftex.def)             Requested size: 360.0pt x 214.3069pt.
- [4 <./task5.png>] [5 <./task6.png>] (/Users/johannesheidecke/Studies/CV/lab1/report/.texpadtmp/Report.aux) ) 
+ [4 <./task5.png>] <task7.png, id=32, 1040.88875pt x 238.8925pt>
+File: task7.png Graphic file (type png)
+ <use task7.png>
+Package pdftex.def Info: task7.png used on input line 82.
+(pdftex.def)             Requested size: 360.0pt x 82.62212pt.
+ <task8.png, id=33, 1044.90375pt x 238.8925pt>
+File: task8.png Graphic file (type png)
+ <use task8.png>
+Package pdftex.def Info: task8.png used on input line 90.
+(pdftex.def)             Requested size: 360.0pt x 82.305pt.
+ [5 <./task6.png> <./task7.png>] <task9.png, id=39, 1040.88875pt x 392.46625pt>
+File: task9.png Graphic file (type png)
+ <use task9.png>
+Package pdftex.def Info: task9.png used on input line 100.
+(pdftex.def)             Requested size: 360.0pt x 135.73634pt.
+ [6 <./task8.png> <./task9.png>] <task10.png, id=45, 935.495pt x 623.32875pt>
+File: task10.png Graphic file (type png)
+ <use task10.png>
+Package pdftex.def Info: task10.png used on input line 108.
+(pdftex.def)             Requested size: 360.0pt x 239.87292pt.
+ <task11.png, id=46, 1037.8775pt x 328.22626pt>
+File: task11.png Graphic file (type png)
+ <use task11.png>
+Package pdftex.def Info: task11.png used on input line 116.
+(pdftex.def)             Requested size: 360.0pt x 113.84918pt.
+ [7 <./task10.png>] <task12.png, id=52, 681.54625pt x 256.96pt>
+File: task12.png Graphic file (type png)
+ <use task12.png>
+Package pdftex.def Info: task12.png used on input line 124.
+(pdftex.def)             Requested size: 360.0pt x 135.7294pt.
+ <task13.png, id=53, 1048.91875pt x 487.8225pt>
+File: task13.png Graphic file (type png)
+ <use task13.png>
+Package pdftex.def Info: task13.png used on input line 132.
+(pdftex.def)             Requested size: 360.0pt x 167.4206pt.
+ <task14.png, id=54, 1045.9075pt x 486.81876pt>
+File: task14.png Graphic file (type png)
+ <use task14.png>
+Package pdftex.def Info: task14.png used on input line 140.
+(pdftex.def)             Requested size: 360.0pt x 167.56638pt.
+ [8 <./task11.png> <./task12.png>] [9 <./task13.png> <./task14.png>] <task15.png, id=65, 1045.9075pt x 494.84875pt>
+File: task15.png Graphic file (type png)
+ <use task15.png>
+Package pdftex.def Info: task15.png used on input line 150.
+(pdftex.def)             Requested size: 360.0pt x 170.33037pt.
+ <task16.png, id=66, 1036.87375pt x 235.88126pt>
+File: task16.png Graphic file (type png)
+ <use task16.png>
+Package pdftex.def Info: task16.png used on input line 158.
+(pdftex.def)             Requested size: 360.0pt x 81.8974pt.
+
+<task17.png, id=67, 1042.89626pt x 315.1775pt>
+File: task17.png Graphic file (type png)
+ <use task17.png>
+Package pdftex.def Info: task17.png used on input line 166.
+(pdftex.def)             Requested size: 360.0pt x 108.79405pt.
+ <task18.png, id=68, 1131.22626pt x 489.83pt>
+File: task18.png Graphic file (type png)
+ <use task18.png>
+Package pdftex.def Info: task18.png used on input line 176.
+(pdftex.def)             Requested size: 360.0pt x 155.88179pt.
+ [10 <./task15.png> <./task16.png>]
+Overfull \hbox (3.12181pt too wide) in paragraph at lines 183--184
+\OT1/cmr/m/n/10.95 The in-built Mat-lab func-tion \OT1/cmr/m/it/10.95 im-bi-na-rize \OT1/cmr/m/n/10.95 cre-ates a log-i-cal ar-ray for an grayscale
+ []
+
+[11 <./task17.png> <./task18.png>] <task19.png, id=80, 1028.84375pt x 233.87375pt>
+File: task19.png Graphic file (type png)
+ <use task19.png>
+Package pdftex.def Info: task19.png used on input line 188.
+(pdftex.def)             Requested size: 360.0pt x 81.83562pt.
+ <task20.png, id=81, 1125.20375pt x 568.1225pt>
+File: task20.png Graphic file (type png)
+ <use task20.png>
+Package pdftex.def Info: task20.png used on input line 196.
+(pdftex.def)             Requested size: 360.0pt x 181.76823pt.
+ <task21.png, id=82, 1141.26375pt x 569.12625pt>
+File: task21.png Graphic file (type png)
+ <use task21.png>
+Package pdftex.def Info: task21.png used on input line 204.
+(pdftex.def)             Requested size: 360.0pt x 179.51888pt.
+ <task22.png, id=83, 985.6825pt x 597.23125pt>
+File: task22.png Graphic file (type png)
+ <use task22.png>
+Package pdftex.def Info: task22.png used on input line 214.
+(pdftex.def)             Requested size: 360.0pt x 218.12885pt.
+ [12 <./task19.png>] [13 <./task20.png> <./task21.png>] [14 <./task22.png>] (/Users/johannesheidecke/Studies/CV/lab1/report/.texpadtmp/Report.aux) ) 
 Here is how much of TeX's memory you used:
- 1522 strings out of 493014
- 22268 string characters out of 6133351
- 79556 words of memory out of 5000000
- 5067 multiletter control sequences out of 15000+600000
- 7926 words of font info for 28 fonts, out of 8000000 for 9000
+ 1620 strings out of 493014
+ 23570 string characters out of 6133351
+ 80705 words of memory out of 5000000
+ 5148 multiletter control sequences out of 15000+600000
+ 8094 words of font info for 29 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,6n,23p,756b,221s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on /Users/johannesheidecke/Studies/CV/lab1/report/.texpadtmp/Report.pdf (5 pages, 4134559 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on /Users/johannesheidecke/Studies/CV/lab1/report/.texpadtmp/Report.pdf (14 pages, 15668201 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
- 28 compressed objects within 1 object stream
+ 119 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 

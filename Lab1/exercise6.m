@@ -7,7 +7,9 @@ function exercise6()
     H = imread('hand.jpg');
     M = imread('mapfre.jpg');
     HM = fuseImg(H, M, 20/255);
+    figure;
     imshow(HM);
+    title('Hand copied in front of tower');
 end
 
 function out = fuseImg(I1, I2, binThreshold)

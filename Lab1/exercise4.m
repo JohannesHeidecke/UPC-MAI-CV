@@ -3,12 +3,16 @@
 % Exercise 4
 % Deliverable by: Johannes Heidecke
 
+function exercise4()
 I = imread('clooney.jpg');
-
-% imshow(I);
-
 cut = 213;
-
-I2 = horzcat(I(:, cut+1:end, :), I(:, 1:cut, :));
 figure;
+I2 = cutAndSwap(I, cut);
 imshow(I2);
+
+end
+
+function out = cutAndSwap(I, cut)
+% cut the image I along the column cut and swap both sides
+out = horzcat(I(:, cut+1:end, :), I(:, 1:cut, :));
+end

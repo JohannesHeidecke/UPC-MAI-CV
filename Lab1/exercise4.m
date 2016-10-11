@@ -4,8 +4,10 @@
 % Deliverable by: Johannes Heidecke
 
 function exercise4()
-I = imread('clooney.jpg');
-cut = 213;
+I = imread('images/clooney.jpg');
+imshow(I)
+point = ginput(1);
+cut = round(point(1));
 figure;
 I2 = cutAndSwap(I, cut);
 imshow(I2);

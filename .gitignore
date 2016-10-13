@@ -6,3 +6,5 @@
 *.bbl
 *.out
 *.asv
+*.texpadtmp*
+*vlfeat-0.9.16*

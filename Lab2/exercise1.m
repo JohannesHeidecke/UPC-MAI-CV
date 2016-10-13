@@ -1,3 +1,7 @@
+% MAI - CV
+% Laboratory 1
+% Exercise 1
+% Deliverable by: Johannes Heidecke / Alejandro Suarez
 function exercise1(filename)
     % Several edge detectors are tested here.
     % In order to perform experiments faster, each detector's parameters can be

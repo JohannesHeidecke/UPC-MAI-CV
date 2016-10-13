@@ -1,3 +1,7 @@
+% MAI - CV
+% Laboratory 1
+% Exercise 1
+% Deliverable by: Johannes Heidecke / Alejandro Suarez
 function exercise2(filename, offset, duration)
 % Reproduce a video overlapping the detected edges.
 %   - offset: start time in seconds. Set to [] or to 0 to start from the begining.
@@ -28,7 +32,7 @@ function exercise2(filename, offset, duration)
     nFrames = ceil(duration*vr.FrameRate);
     
     hf = figure('Visible','off','Position',[150,150,vr.Width,vr.Height]);
-    hi = imshow(zeros(vr.Height,vr.Width,3,'uint8'));
+    hi = imshow(read(vr,firstFrame));
     set(hi,'EraseMode','xor')
     controls = getControls(hf,@start);
     set(hf,'Visible','on')
@@ -55,9 +59,9 @@ function exercise2(filename, offset, duration)
         end
         set(src,'Visible','on')
 
-        mean_read = mean(read_time(2:end));
-        mean_read_process = mean(read_process_time(2:end));
-        mean_spent = mean(spent(2:end));
+        mean_read = mean(read_time);
+        mean_read_process = mean(read_process_time);
+        mean_spent = mean(spent);
         mean_process = mean_read_process - mean_read;
         mean_draw = mean_spent - mean_read_process;
         display(['Mean time to read a frame: ',num2str(mean_read)])
@@ -69,6 +73,10 @@ function exercise2(filename, offset, duration)
 end
 
 function controls = getControls(f, startmethod)
+    % We create the UI controls here.
+    %   - f: handle of the figure where the controls should be appended
+    %   - startmethod: reference to the method that should be executed
+    %     when the start button is pressed.
     controls = {};
     
     controls.general = struct(...
@@ -146,6 +154,10 @@ function setVisible(controlset,visible)
 end
 
 function Iout = findEdges(controls,Iin)
+    % Find edges in Iin using the method and parameters indicated by
+    % controls
+    %   - controls: UI controls that indicate method and parameters 
+    %   - Iin: input image
     img_gray = rgb2gray(Iin);
     method = getPopup(controls.general.method);
     switch method

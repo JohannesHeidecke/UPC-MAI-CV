@@ -1,10 +1,10 @@
 % MAI - CV
 % Laboratory 1
 % Exercise 2
-% Deliverable by: Johannes Heidecke
+% Deliverable by: Johannes Heidecke / Alejandro Suarez
 
 % read the image chairs.jpg from file
-I = imread('chairs.jpg');
+I = imread('./images/chairs.jpg');
 
 % extract the different color channels:
 rI = I(:, :, 1);

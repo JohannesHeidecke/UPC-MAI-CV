@@ -1,7 +1,7 @@
 % MAI - CV
 % Laboratory 1
 % Exercise 4
-% Deliverable by: Johannes Heidecke
+% Deliverable by: Johannes Heidecke / Alejandro Suarez
 
 function exercise4()
 I = imread('images/clooney.jpg');

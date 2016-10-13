@@ -1,7 +1,7 @@
 % MAI - CV
 % Laboratory 1
 % Exercise 3
-% Deliverable by: Johannes Heidecke
+% Deliverable by: Johannes Heidecke / Alejandro Suarez
 
 function exercise3()
 % read an image file:

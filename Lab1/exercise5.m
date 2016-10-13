@@ -1,7 +1,7 @@
 % MAI - CV
 % Laboratory 1
 % Exercise 5
-% Deliverable by: Johannes Heidecke
+% Deliverable by: Johannes Heidecke / Alejandro Suarez
 
 function exercise5()
 

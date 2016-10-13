@@ -1,7 +1,7 @@
 % MAI - CV
 % Laboratory 1
 % Exercise 1
-% Deliverable by: Johannes Heidecke
+% Deliverable by: Johannes Heidecke / Alejandro Suarez
 
 % create the 3 images in gray scale:
 I1 = zeros(200, 200, 'uint8');

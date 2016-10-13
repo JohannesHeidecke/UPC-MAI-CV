@@ -4,8 +4,8 @@
 % Deliverable by: Johannes Heidecke
 
 function exercise6()
-    H = imread('hand.jpg');
-    M = imread('mapfre.jpg');
+    H = imread('images/hand.jpg');
+    M = imread('images/mapfre.jpg');
     HM = fuseImg(H, M, 20/255);
     figure;
     imshow(HM);
@@ -20,7 +20,7 @@ function out = fuseImg(I1, I2, binThreshold)
 
 % create the binarization of I1, using binThreshhold:
 I1g = rgb2gray(I1);
-B = imbinarize(I1g, binThreshold);
+B = im2bw(I1g, binThreshold);
 % create inverted binarization:
 IB = ~B;
 

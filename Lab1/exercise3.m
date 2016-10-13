@@ -5,7 +5,7 @@
 
 function exercise3()
 % read an image file:
-I = imread('buffet.jpg');
+I = imread('images/buffet.jpg');
 
 rescaleAndPlot(I);
 histogramComparison(I);

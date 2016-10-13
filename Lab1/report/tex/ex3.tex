@@ -24,7 +24,7 @@ It is possible to return the smaller image back to its original size. As figure 
   \label{fig:task7}
 \end{figure}
 
-This effect can be observed better when we zoom in a smaller area of the image, as in figure \ref{fig:task8}. This figure shows, that when scaling down to 0.1 of original size, most details are lost and the image looks very pixelated. When restoring the 0.1 image back to its original size with a bicubic interpolation, the pixelated look disappears, but the former details can not be recovered.
+This effect can be observed better when we zoom in a smaller area of the image, as in figure \ref{fig:task8}. This figure shows that, when scaling down to 0.1 of original size, most details are lost and the image looks very pixelated. When restoring the 0.1 image back to its original size with a bicubic interpolation the pixelated look disappears, but the former details cannot be recovered.
 
 \begin{figure}[!hbt]
   \includegraphics[width=\textwidth]{./img/task8.png}
@@ -34,7 +34,7 @@ This effect can be observed better when we zoom in a smaller area of the image, 
 
 As an alternative for removing image details different smoothing filters can be applied. One option is to apply evenly weighted moving averages that simply add all values in the neighborhood of a pixel and then normalize the sum by dividing through the number of added pixels. In this case, the size and shape of the area that is chosen to calculate the average has a big impact on the outcome, as can be seen in figures \ref{fig:task9} and \ref{fig:task10}.
 
-In figure \ref{fig:task9} both a horizontal filter of size 1x50 pixel and a vertical filter of size 50x1 is applied to all pixels in the image. The former results in an effect that looks like the camera had been moving horizontally while taking the picture, while in the latter the movement is horizontal (this is known as motion blur in most photography/art suites like GIMP or Photoshop). While both filters will remove some kind of noise in the image or add some artistic effect, their results still look very different. 
+In figure \ref{fig:task9} both a horizontal filter of size 1x50 pixel and a vertical filter of size 50x is applied to all pixels in the image. The former results in an effect that looks like the camera had been moving horizontally while taking the picture, while in the latter the movement is horizontal (this is known as motion blur in most photography/art suites like GIMP or Photoshop). While both filters will remove some kind of noise in the image or add some artistic effect, their results still look very different. 
 
 \begin{figure}[!hbt]
   \includegraphics[width=\textwidth]{./img/task9.png}
@@ -50,7 +50,7 @@ Figure \ref{fig:task10} shows evenly weighted moving average filters in square s
   \label{fig:task10}
 \end{figure}
 
-Besides evenly weighted moving averages it is also possible to reward proximity to the target pixel by weighting close neighbors of the pixel more highly. Figure \ref{fig:task11} shows the comparison of an evenly weighted horizontal kernel of 1 x 10 pixel size against a weighted horizontal kernel with weights [1, 2, 4, 8, 16, 32, 16, 8, 4, 2, 1]. The evenly weighted filtering gives the same importance to pixels that are much further away than close neighbors and results in a more blurry picture with less details.
+Evenly weighted moving averages aside, it is also possible to reward proximity to the target pixel by weighting close neighbors of the pixel more highly. Figure \ref{fig:task11} shows the comparison of an evenly weighted horizontal kernel of 1 x 10 pixel size against a weighted horizontal kernel with weights [1, 2, 4, 8, 16, 32, 16, 8, 4, 2, 1]. The evenly weighted filtering gives the same importance to pixels that are much further away than close neighbors and results in a more blurry picture with less details.
 
 \begin{figure}[!hbt]
   \includegraphics[width=\textwidth]{./img/task11.png}
@@ -94,7 +94,7 @@ Usually it is desired to normalize kernels in convolution filtering in order to 
   \label{fig:task15}
 \end{figure}
 
-It is also possible to apply the same filter iteratively more than once to an image. The effect can be observed in figure \ref{fig:task16}. It is worth noticing that convolving more than once an image with the same kernel will be similar to applying an Gaussian filter (anisotropic in the general case) from the beginning. This is because of the central limit theorem (we can think of convolving the same filter with itself several time as summing several identically distributed random variables).
+It is also possible to apply the same filter iteratively more than once to an image. The effect can be observed in figure \ref{fig:task16}. It is worth noticing that convolving more than once an image with the same kernel will be similar to applying an Gaussian filter (anisotropic in the general case) from the beginning. This is because of the central limit theorem (we can think of convolving the same filter with itself several times as summing several identically distributed random variables).
 
 \begin{figure}[!hbt]
   \includegraphics[width=\textwidth]{./img/task16.png}

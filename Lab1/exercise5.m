@@ -5,7 +5,7 @@
 
 function exercise5()
 
-I = imread('car_gray.jpg');
+I = imread('images/car_gray.jpg');
 
 % create binarizations with the thresholds 20, 30, 150 and 255.
 figure;
@@ -40,7 +40,7 @@ end
 function out = thresholdImg(I, threshold)
 % creates the binarization of I with the specified threshold
 % threshold should be between 0 and 1, inclusive
-out = imbinarize(I, threshold);
+out = im2bw(I, threshold);
 
 end
 

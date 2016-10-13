@@ -1,0 +1,36 @@
+function exercise2(filename,time)
+% Compare different detectors
+    if exist('../images_video','dir')
+        path = '../images_video';
+    elseif exist('./images_video','dir')
+        path = './images_video';
+    else
+        error('Cannot find images_video folder')
+    end
+    
+    vr = VideoReader([path,'/',filename]);
+    
+    nFrame = 1+round(time*vr.FrameRate);
+    rgb = read(vr,nFrame);
+    frame = rgb2gray(rgb);
+    
+    [eSobel,thr_sobel] = edge(frame,'sobel');
+    [ePrewitt,thr_prewitt] = edge(frame,'prewitt');
+    [eRoberts,thr_roberts] = edge(frame,'roberts');
+    [eLog,thr_log] = edge(frame,'log');
+    [eZerocross,thr_zerocross] = edge(frame,'zerocross',[],fspecial('gaussian',10,sqrt(2)));
+    [eCanny,thr_canny] = edge(frame,'canny',[],sqrt(2));
+    
+    
+    min = floor(time/60);
+    sec = mod(time,60);
+    subplot(3,3,2); imshow(rgb); title(['Frame at time ',num2str(min),':',num2str(sec)]);
+    subplot(3,3,4); imshow(eSobel); title(['Sobel with automatic selected thr ',num2str(thr_sobel)])
+    subplot(3,3,5); imshow(ePrewitt); title(['Prewitt with automatic selected thr ',num2str(thr_prewitt)])
+    subplot(3,3,6); imshow(eRoberts); title(['Roberts with automatic selected thr ',num2str(thr_roberts)])
+    subplot(3,3,7); imshow(eLog); title(['LoG with automatic selected thr ',num2str(thr_log)])
+    subplot(3,3,8); imshow(eZerocross); title(['Zerocross with automatic selected thr ',num2str(thr_zerocross)])
+    subplot(3,3,9); imshow(eCanny); title(['Canny with automatic low thr ',num2str(thr_canny(1)),' and hi thr ',num2str(thr_canny(2))])
+    
+end
+

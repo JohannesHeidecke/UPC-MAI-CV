@@ -5,22 +5,12 @@
 We have considered seven different detectors:
 \begin{itemize}
 	\item Simple derivative and thresholding method
-	\item Sobel derivative and thresholding with NMS (Non-Maximum Suppression).
-	This method finds edges using the Sobel approximation to the derivative. It returns edges
-	at those points where the gradient of I is maximum. Returns all edges that are stronger
-	than a certain threshold. The NMS takes care of thinning the edges.
-	\item Prewitt derivative and thresholding with NMS. Same than Sobel, but with the Prewitt
-	approximation of the derivative instead.
-	\item Roberts derivative and thresholding with NMS. Same than Roberts, but with the Roberts
-	approximation of the derivative instead.
-	\item LoG (Laplacian of Gaussians). This method performs the convolution of the image with
-	an approximation of the Laplacian of a Gaussian function. There is also a threshold involved
-	with a similar role than in the previous methods.
-	\item Zero-cross method. This method finds edges by looking for zero-crossings after
-	filtering I with an arbitrary filter. A threshold may be specified.
-	\item Canny. The Canny method finds edges by looking for local maxima of the gradient of I.
-	The edge function calculates the gradient using the derivative of a Gaussian filter.
-	This method uses two thresholds to detect strong and weak edges.
+	\item Sobel derivative and thresholding with Non-Maximum Suppression (NMS). This method finds edges using the Sobel approximation to the derivative. It returns edges at those points where the gradient of the image is higher than a certain threshold. The NMS takes care of thinning the edges.
+	\item Prewitt derivative and thresholding with NMS. Just like Sobel, but using the Prewitt approximation of the derivative instead.
+	\item Roberts derivative and thresholding with NMS. Works like Sobel and Prewitt, but using the Roberts approximation of the derivative.
+	\item LoG (Laplacian of Gaussians). This method performs the convolution of the image with an approximation of the Laplacian of a Gaussian function. There is also a threshold involved with a similar role like in the previous methods.
+	\item Zero-cross method. This method finds edges by looking for zero-crossings after filtering the image with an arbitrary filter. A threshold may be specified.
+	\item Canny. The Canny method finds edges by looking for local maxima of the image's gradient. 	The edge function calculates the gradient using the derivative of a Gaussian filter. 	This method uses two thresholds to first detect strong edges and then weak edges connected to the strong edges.
 \end{itemize}
 
 The simple derivative detector has been implemented by us as follows:
@@ -39,28 +29,26 @@ where the $A_{\geq t}$ denotes a matrix with 1 in each position $(i,j)$ where $a
 zero otherwise. Notice that $T$ is the threshold and that we do not perform NMS.
 \end{subequations}
 
-We have used the MATLAB implementation to test the other methods
-(available through the \emph{edge} function).
+We have used the standard MATLAB implementations to test the other methods (available through the \emph{edge} function).
 
-In order to perform our experiments, we have implemented an interface with interactive controls so
-the user can select the detector and its parameters in runtime \texttt{exercise1.m}. An example
-of these controls can be seen in figure \ref{fig:simplegui}.
-There is also a more classical script with the name \texttt{exercise1.m.old}.
+In order to perform our experiments, we have implemented an interface with interactive controls so the user can select the detector and its parameters during runtime \texttt{exercise1.m}. An example of these controls can be seen in figure \ref{fig:simplegui}. There is also a more classical script with the name \texttt{exercise1.m.old}.
 
 \subsection{Comparison of methods}
 
-As for which is the best edge detector, there is not close answer. It highly depends on the application and the evaluation criteria. For our analysis, we consider mainly these four aspects: general
-performance, how good
-the edge detection is when we let the method automatically computes its parameters; the number of
-parameters in case there is need to fine-tune the method; and the efficiency. The last of these
-qualities could be measured thanks to the experiments in exercise \ref{sec:enhancing}.
+As to which is the best edge detector, there is no general answer. It highly depends on the application and the evaluation criteria. For our analysis, we consider mainly these four aspects: 
+\begin{itemize}
+	\item general performance
+	\item performance when methods automatically set their own parameters
+	\item number of parameters if manual fine tuning is needed
+	\item efficiency
+\end{itemize}
+The last of these qualities could be measured thanks to the experiments in exercise \ref{sec:enhancing}.
 
 The Canny detector is the most sophisticated detector and has a very
 good performance for a wide domain of images. It yields very good results when we let the detector
 choose automatically the threshold parameters and with the default $\sigma = 1$. The most obvious
 drawbacks are that it is the most time-consuming method and that, when the default parameters do not
-work good enough, we have to fine-tune three parameters (the high threshold, the low threshold and the
-$\sigma$ value) for our particular application. Even so, a fixed set of parameters can give
+work good enough, we have to fine-tune three parameters (the high threshold, the low threshold and the $\sigma$ value) for our particular application. Even so, a fixed set of parameters can give
 outstanding results for some applications. Results can be seen in figure \ref{fig:im6}. 
 
 \begin{figure}[!hbt]
@@ -69,7 +57,7 @@ outstanding results for some applications. Results can be seen in figure \ref{fi
   \label{fig:im6}
 \end{figure}
 
-The Sobel, Prewitt and Roberts detector lead to very similar result. The main difference among them
+The Sobel, Prewitt and Roberts detector lead to very similar results. The main difference among them
 is how they approximate the derivative. The Roberts detector has the particularity of not being useful
 for calculating the horizontal/vertical edges, because it uses approximation of the diagonal
 derivatives instead of the derivatives along the main axis. These detectors are quite fast, and in
@@ -124,7 +112,7 @@ However, it has the drawback of being too reactive to changes in the input (i.e.
 $\sigma$, a small increment of the threshold can be the difference between clearly extracted edges
 and a poor edge selection). In terms of efficiency, it is between the Sobel and the Canny detector.
 In case that the automatic selection of the threshold and the default $\sigma$ are not good enough,
-there are two parameters two tune, which is also between the Sobel and the Canny method. See some
+there are two parameters to tune, which is also between the Sobel and the Canny method. See some
 graphical examples of this edge detector in figure \ref{fig:im4}.
 
 \begin{figure}[!hbt]

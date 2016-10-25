@@ -21,10 +21,10 @@ d1 = 10; d2 = 15; d3 = 20; d4 = 10; % distances from the border
 w1 = 50; w2 = 20; w3 = 20;          % width of the rectangles
 h1 = 10; h2 = 20;                   % height of the rectangles
 
-L = 50;                            % mask size [px]
-d1 = 10; d2 = 15; d3 = 20; d4 = 10; % distances from the border
-w1 = 30; w2 = 10; w3 = 10;          % width of the rectangles
-h1 = 10; h2 = 20;                   % height of the rectangles
+% L = 50;                            % mask size [px]
+% d1 = 10; d2 = 15; d3 = 20; d4 = 10; % distances from the border
+% w1 = 30; w2 = 10; w3 = 10;          % width of the rectangles
+% h1 = 10; h2 = 20;                   % height of the rectangles
 
 
 %% Draw the 2 feature masks (just for visualization purpose)
@@ -35,7 +35,7 @@ m1(d1+1:d1+h1,d2+1:d2+w1) = 1;
 m1(d1+1+h1:d1+2*h1,d2+1:d2+w1) = 2;
 figure(1);
 imagesc(m1);
-title('Rectangluar mask for feature 1');
+title('Rectangular mask for feature 1');
 axis square;
 colormap([128 128 128; 0 0 0; 255 255 255]/255);
 
@@ -44,7 +44,7 @@ m2(d3+1:d3+h2,d4+w2+1:d4+w2+w3) = 2;
 m2(d3+1:d3+h2,d4+w2+w3+1:d4+2*w2+w3) = 1;
 figure(2);
 imagesc(m2);
-title('Rectangluar mask for feature 2');
+title('Rectangular mask for feature 2');
 axis square;
 colormap([128 128 128; 0 0 0; 255 255 255]/255);
 
@@ -52,11 +52,12 @@ colormap([128 128 128; 0 0 0; 255 255 255]/255);
 %% Load image, compute Integral Image and visualize it
 
 % Load image 'NASA1.jpg' and convert image from rgb to grayscale 
-% >> code here <<
+I = rgb2gray(imread('NASA1.bmp'));
 
 % Compute the Integral Image
-% >> code to compute the integral image S <<
-
+S = cumsum(cumsum(double(I),2));
+imshow(S/S(end));
+title('(Normalized) Integral image')
 
 
 %% Compute features for regions with faces
@@ -67,7 +68,7 @@ Y = [118 151 112 177 114 177 121 184 127 270 298 279 285 295];
 XY_FACE =  [X' Y'];    %[x1 y1; x2 y2 .....]
 
 % Initialize the feature matrix for faces
-FEAT_FACE = [];
+FEAT_FACE = zeros(size(XY_FACE,1),2);
 
 for i = 1:size(XY_FACE,1)
     
@@ -82,18 +83,16 @@ for i = 1:size(XY_FACE,1)
     
     % compute area of regions C, D and E for the second feature
     % HERE WE USE INTEGRAL IMAGE!
-    % >> code to compute the area of regions C and E <<
-    %     area_C = ...
-    %     area_D = ...
-    %     area_E = ...
-    
+    area_C = S(y+d3+h2,x+d4+w2) - S(y+d3,x+d4+w2) - S(y+d3+h2,x+d4) + S(y+d3,x+d4);
+    area_D = S(y+d3+h2,x+d4+w2+w3) - S(y+d3,x+d4+w2+w3) - S(y+d3+h2,x+d4+w2) + S(y+d3,x+d4+w2);
+    area_E = S(y+d3+h2,x+d4+2*w2+w3) - S(y+d3,x+d4+2*w2+w3) - S(y+d3+h2,x+d4+w2+w3) + S(y+d3,x+d4+w2+w3);
     
     % compute features value
     F1 = area_B - area_A;
     F2 = area_D - (area_C + area_E);
     
     % cumulate the computed values
-    FEAT_FACE = [FEAT_FACE; [F1 F2]];
+    FEAT_FACE(i,:) = [F1 F2];
     
 end
 
@@ -105,7 +104,7 @@ Y=[ 36    28    27    30    46   768   757   742   859   745   912   777   994  
 XY_NON_FACE = [X' Y'];
 
 % Initialize the feature matrix for non-faces
-FEAT_NON_FACE = [];
+FEAT_NON_FACE = zeros(size(XY_NON_FACE,1),2);
 
 for i = 1:size(XY_NON_FACE,1)
     
@@ -119,17 +118,16 @@ for i = 1:size(XY_NON_FACE,1)
     
     % compute area of regions C, D and E for the second feature
     % HERE WE USE INTEGRAL IMAGE!
-    % >> code to compute the area of regions C and E <<
-    %     area_C = ...
-    %     area_D = ...
-    %     area_E = ...
+    area_C = S(y+d3+h2,x+d4+w2) - S(y+d3,x+d4+w2) - S(y+d3+h2,x+d4) + S(y+d3,x+d4);
+    area_D = S(y+d3+h2,x+d4+w2+w3) - S(y+d3,x+d4+w2+w3) - S(y+d3+h2,x+d4+w2) + S(y+d3,x+d4+w2);
+    area_E = S(y+d3+h2,x+d4+2*w2+w3) - S(y+d3,x+d4+2*w2+w3) - S(y+d3+h2,x+d4+w2+w3) + S(y+d3,x+d4+w2+w3);
     
     % compute features value
     F1 = area_B - area_A;
     F2 = area_D - (area_C + area_E);
     
     % cumulate the computed values
-    FEAT_NON_FACE = [FEAT_NON_FACE; [F1 F2]];
+    FEAT_NON_FACE(i,:) = [F1 F2];
     
 end
 
@@ -172,7 +170,7 @@ end
 %% Define the new regions of the test image 
 
 % Load image 'NASA2.bmp' and convert image from rgb to grayscale 
-% >> code here <<
+I = rgb2gray(imread('NASA2.bmp'));
 
 % Select regions with FACES and NON-FACES
 figure(), imshow(I);

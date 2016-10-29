@@ -1,3 +1,19 @@
 \section{Annex}
 
-Some text in the annex.
+Here we list all the delivered script and function files delivered for this practice,
+aside from those that were already provided to us.
+We include relevant observations. For full insight, we refer the reader to the
+source code.
+
+\begin{itemize}
+	\item \texttt{feature\_matching.m}: code for the first section (Feature Matching) of
+	the assignment. The script is divided into several cells so they can be tested
+	more conveniently.
+	\item \texttt{panorama\_creation.m}: method that performs the functionality requested
+	in the second section of the assignment (Panorama creation). The method accepts
+	two image paths and three optional parameters: \texttt{M}, the number of
+	RANDSAC iterations (default 100); \texttt{N}, the cardinality of the subset built at each
+	RANDSAC iteration (default 10); and \texttt{epsilon}, how close has to be a point from the
+	second image to its correspondence in the first image in order for it to be counted
+	as a ``success'' by the RANDSAC algorithm (default 5 px).
+\end{itemize}

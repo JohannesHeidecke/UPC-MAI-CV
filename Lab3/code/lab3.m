@@ -38,16 +38,45 @@ I = single(rgb2gray(I));
 
 % Question 2:
 
-figure;
-[f,d] = vl_sift(I);
-subplot(1, 2, 1);
-show_keypoints(I, f);
-title('Keypoints without peak threshold');
-[f,d] = vl_sift(I,'PeakThresh', 0.01);
-subplot(1, 2, 2);
-show_keypoints(I,f);
-title('Keypoints with peak threshold of 0.01');
+% figure;
+% [f,d] = vl_sift(I);
+% subplot(1, 2, 1);
+% show_keypoints(I, f);
+% title('Keypoints without peak threshold');
+% [f,d] = vl_sift(I,'PeakThresh', 0.01);
+% subplot(1, 2, 2);
+% show_keypoints(I,f);
+% title('Keypoints with peak threshold of 0.01');
 
+% Question 3: 
+%  ivals = 0:0.005:0.1;
+%  keypN = ones(size(ivals));
+%  for i = 1:length(ivals)
+%      [f,d] = vl_sift(I,'PeakThresh', ivals(i));
+%      keypN(i) = size(f, 2);
+%  end
+%  
+% plot(ivals, keypN, 'LineWidth',3)
+% title('Number of keypoints on roofs1 for different peak thresholds');
+% xlabel('peak threshold');
+% ylabel('number of keypoints detected');
+
+
+% figure;
+% [f,d] = vl_sift(I,'PeakThresh', 0.01);
+% subplot(1, 3, 1);
+% show_keypoints(I, f);
+% title('Keypoints with peak threshold of 0.01');
+% [f,d] = vl_sift(I,'PeakThresh', 0.04);
+% subplot(1, 3, 2);
+% show_keypoints(I,f);
+% title('Keypoints with peak threshold of 0.04');
+% [f,d] = vl_sift(I,'PeakThresh', 0.06);
+% subplot(1, 3, 3);
+% show_keypoints(I,f);
+% title('Keypoints with peak threshold of 0.06');
+
+% Question 4:
 
 
 

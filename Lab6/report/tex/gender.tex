@@ -11,12 +11,20 @@ For this exercise we used a gender recognition system based on the AR-Face datab
 	\item Why the size of the field internal, size(ARFace.internal), is $ 1188 \times 2210 $?
 \end{itemize}
 
-ARFace is a matlab struct. \texttt{ARFace.person} contains 2210 numeric values that link each 
+ARFace is a matlab struct. \texttt{ARFace.person} contains 2210 numeric values that link each image of a person in the database to a unique numeric identifier that corresponds to the person in the image. There are 85 different persons in the database, each occurring 26 times. 
+
+The images are internally stored as bitmaps with a resolution of $33 \times 36$ pixels (which can be recalled from the field \texttt{ARFace.internalSz}. The images are reshaped and then saved as a vector of length $33 \times 36 = 1188 $. The size of the field \texttt{ARFace.internal} corresponds to 2210 different images of size 1188 pixel each. \newline
 
 
 \question
 
-$ \bullet $ What are the variables '\texttt{n}' and '\texttt{index}' of the function \texttt{fold\_validation.m}?
+\begin{itemize}
+	\item What are the variables '\texttt{n}' and '\texttt{index}' of the function \texttt{fold\_validation.m}?
+\end{itemize} 
+
+The variables \texttt{n} and \texttt{index} are used to sample the data in different subsamples of training and test data. We are using F-fold validation, using F different, mutually exclusive subsamples as test data. The variable \texttt{n} is used in each iteration to pick $ \lfloor\frac{N}{F}\rfloor $ new persons to be used as test sample in this iteration, with $N$ being the number of unique persons and $F$ the number of iterations. The variable \texttt{index} links the matrix of images to a logical matrix with value $ 0 $ if the image is not of a person being used for the test sample in this iteration and $ 1 $ otherwise. The training and test data can then easily be set in each iteration based on this logical matrix. 
+
+In the example of the 2110 images from the AR-Face database and a 10-fold validation, we use $ 10 $ subsamples as test data, each containing $ \lfloor\frac{N}{F}\rfloor = \lfloor\frac{85}{10}\rfloor = 8 $ images. The unique persons are shuffled and \texttt{n} contains $ 8 $ of them in each iteration in not overlapping windows. In the first iteration, \texttt{n} contains the $ 8 $ first persons of the shuffled list of unique persons, in the second iteration persons $9$ through $16$, and so on. The variable \texttt{index} maps the persons selected for the test data to the features and labels, splitting them in four different sets: \texttt{TrainSet, TrainLabels, TestSet, TestLabels}.\newline
 
 \question
 

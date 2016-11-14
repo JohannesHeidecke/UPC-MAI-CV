@@ -33,6 +33,10 @@ display(ARFace)
 NumberMales = sum(ARFace.gender);
 NumberSamples = size(ARFace.gender, 2);
 NumberFemales = NumberSamples - NumberMales;
+
+%% Analyse ARFace.person:
+% [a,b]=hist(ARFace.person,unique(ARFace.person))
+
 %% Visualize some of the internal faces and save in bmp images
 % Use the function reshape to transform the information from a vector to a
 % matrix.

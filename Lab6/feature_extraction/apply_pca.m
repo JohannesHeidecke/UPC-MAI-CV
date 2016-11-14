@@ -9,7 +9,7 @@ function PCAImagesDim = apply_pca(images, dim)
 [PCACoefficients, PCAImages, PCAValues] = princomp(images);
 
 %% Show the 30 first eigenfaces
-show_eigenfaces(images');
+show_eigenfaces(PCACoefficients);
 
 %% Plot the explained variance using 100 dimensions
 PoVs = zeros(1, size(PCAValues,1));

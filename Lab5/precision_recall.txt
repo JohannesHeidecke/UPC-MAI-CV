@@ -1,0 +1,12 @@
+TP = 12
+TN = 12
+FP = 1
+FN = 11
+
+TOTAL = 36
+
+Precision = TP / (TP + FP) = 12/13
+
+Recall = TP / (TP + FN) = 12/23
+
+Accuracy = (TP+TN)/(TP+TN+FP+FN) = 23/36

@@ -65,15 +65,23 @@ subjects = subjects';
 
 
 %% Feature Extraction using PCA
+tic;
 mat_features_pca = feature_extraction('PCA', images);
-
+strcat('# pca dim5 features: ', int2str(size(mat_features_pca)))
+toc;
 
 %% Feature Extraction using PCA (95% variance explained)
+tic;
 mat_features_pca95 = feature_extraction('PCA95', images);
+strcat('# pca 95% features: ', int2str(size(mat_features_pca95)))
+toc;
 
 
 %% Feature Extraction using LDA
+tic;
 mat_features_lda = feature_extraction('LDA', images, labels);
+strcat('# lda features: ', int2str(size(mat_features_lda)))
+toc;
 
 
 %% Classification
@@ -84,12 +92,18 @@ mat_features_lda = feature_extraction('LDA', images, labels);
 % Turn off warnings for deprecated KNNCLASSIFY:
 warning('off', 'bioinfo:knnclassify:incompatibility');
 
-F = 10;
+F = 20;
+tic;
 Rates_pca = validation(mat_features_pca', labels', subjects', F);
+toc;
 display(Rates_pca);
+tic;
 Rates_pca95 = validation(mat_features_pca95', labels', subjects', F);
+toc;
 display(Rates_pca95);
+tic;
 Rates_lda = validation(mat_features_lda', labels', subjects', F);
+toc;
 display(Rates_lda);
 
 

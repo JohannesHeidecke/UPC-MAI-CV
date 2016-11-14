@@ -19,7 +19,7 @@ Rates.Prec=TP/(TP+FP)*100;
 Rates.FAR=FP/(TP+FN)*100;
 Rates.Recall=TP/(TP+FN)*100;
 Rates.Acc=(TP+TN)/(TP+TN+FP+FN)*100;
-Rates.Error=error;
+Rates.Error=error*100;
 Rates.ConfusionMatrix=[TP FN; FP TN];
 
 

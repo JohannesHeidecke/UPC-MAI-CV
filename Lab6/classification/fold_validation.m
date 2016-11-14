@@ -65,7 +65,7 @@ for i = 1:NFolds
     TestSet=T_TestSet';
    
     % Train a k-nn classifier and test the test samples using knnclassify.m
-    k=2;
+    k=8;
     idx = knnclassify(TestSet', TrainSet', TrainLabels', k);
     Result_labels=idx';
         
@@ -75,7 +75,7 @@ for i = 1:NFolds
     FN(i) = sum(Result_labels(TestLabel==1)==0);
     TP(i) = sum(Result_labels(TestLabel==1)==1); 
     TN(i) = sum(Result_labels(TestLabel==0)==0);
-    error(i)=FP(i)+FN(i)/NTest;
+    error(i)=(FP(i)+FN(i))/NTest;
 
 end
 

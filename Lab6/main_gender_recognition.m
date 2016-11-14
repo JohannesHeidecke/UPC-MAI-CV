@@ -1,7 +1,7 @@
 % Computational Vision
 % Practicum Face Recognition: Gender recognition
 %
-% Student name: ...
+% Student name: Johannes Heidecke, Alejandro Suárez
 %
 % >> OBJECTIVE: 
 % 1) Analize the code
@@ -30,19 +30,15 @@ display(ARFace)
 
 %% Count the number of samples and samples males and females of the data set.
 % This information is in ARFace.gender ==> male == 1, female == 0
-% 1. To complete:
-% NumberMales = ...
-% NumberSamples = ...
-% NumberFemales = ...
-
+NumberMales = sum(ARFace.gender);
+NumberSamples = size(ARFace.gender, 2);
+NumberFemales = NumberSamples - NumberMales;
 %% Visualize some of the internal faces and save in bmp images
 % Use the function reshape to transform the information from a vector to a
 % matrix.
-% 2. To complete:
-for i=1:10:NumberSamples
-   
-    % >> code here <<
-   
+for i=1:10:NumberSamples  
+    I = reshape(ARFace.internal(:, i), ARFace.internalSz);
+    imwrite(I, strcat('out/face_',int2str(i),'.bmp'));  
 end
 
 
@@ -54,10 +50,9 @@ end
 %   subjects(i) is the number of the subject of sample i.
 % Use the "internal" images, we will reduce dimensionality later.
 
-% 3. To complete:
-% images = ...
-% labels = ...
-% subjects = ...
+images = ARFace.internal;
+labels = ARFace.gender;
+subjects = ARFace.person;
     
 %% Atention! We will use the dataset in the representation: Sample x Variables (Samples x 1188):
 images = images';
@@ -81,6 +76,10 @@ mat_features_lda = feature_extraction('LDA', images, labels);
 % Call the function validation to perform the F-fold
 % cross validation with: the samples, labels, information
 % about the training set subjects and F the number of folds.
+
+% Turn off warnings for deprecated KNNCLASSIFY:
+warning('off', 'bioinfo:knnclassify:incompatibility');
+
 F = 10;
 Rates_pca = validation(mat_features_pca', labels', subjects', F);
 display(Rates_pca);

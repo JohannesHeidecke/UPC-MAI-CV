@@ -1,5 +1,5 @@
 % Computational Vision
-% Student names: ...
+% Student names: Johannes Heidecke and Alejandro Suarez
 %
 % >> OBJECTIVE:
 % 1) Write the code for Exercise 3
@@ -17,22 +17,30 @@ detection_rate = [];
 %% Detection over a video sequence (100 frames)
 
 % Create a cascade detector object.
-faceDetector = vision.CascadeObjectDetector();
-videoFileReader = vision.VideoFileReader('Black_or_White_face_Morphing.mp4');
 
-while ~isDone(videoFileReader)
+videoReader = VideoReader('Black_or_White_face_Morphing.ogv'); % substitute .ogv by .mp4
+% faceDetector = vision.CascadeObjectDetector('MinSize', [50,50]); % uncomment this
+
+currAxes = axes;
+
+while hasFrame(videoReader)
 
     % Extract the next video frame
-    % >> code here <<
-    
+    frame = readFrame(videoReader);
     
     % Select a video frame and run the detector.    
-    % >> code here <<
-    
+    %bbox = step(faceDetector, frame); % uncomment this
+    bbox = [350 250 500 300]; % comment this
     
     % Draw the returned bounding box around the detected face.
-    % >> code here <<
     
+    image(frame, 'Parent', currAxes)
+    
+    for idx = 1:size(bbox,1)
+        rectangle('Position', bbox(idx,:), 'EdgeColor', 'g')
+    end
+    
+    %pause(1/videoReader.FrameRate)
 end
 
 

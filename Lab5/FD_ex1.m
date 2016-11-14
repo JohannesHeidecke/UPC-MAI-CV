@@ -1,5 +1,5 @@
 % Computational Vision
-% Student names: ...
+% Student names: Johannes Heidecke and Alejandro Suarez
 %
 % >> OBJECTIVE: 
 % 1) Analize the code
@@ -173,16 +173,17 @@ end
 I = rgb2gray(imread('NASA2.bmp'));
 
 % Select regions with FACES and NON-FACES
-figure(), imshow(I);
-[x1, y1] = ginput();
+%figure(), imshow(I);
+%[x1, y1] = ginput();
 
 % You could use ginput only once and then copy the coordinates
 % >> copy coordinates here: <<
-% x1 = ...
-% y1 = ...
+x1 = [103;282;457;589;720;891;1042;1180;1261;1074;945;798;667;532;414;227;65;129;354;579;778;1030;1270;543;600;823;1062;1189;847;270;26;1257;1273;77;523;253];
+y1 = [159;165;124;138;145;138;138;138;202;225;253;232;264;267;217;250;274;384;384;382;360;351;361;796;627;543;582;762;15;40;63;76;592;570;397;378];
 
-x1 = round(x1);
-y1 = round(y1);
+% Not needed
+% x1 = round(x1);
+% y1 = round(y1);
 
 % (X,Y) coordinates of the top-left corner of windows with face
 XY_TEST = [x1 y1];
@@ -209,9 +210,9 @@ for i = 1:size(XY_TEST,1)
     % compute area of regions C, D and E for the second feature
     % HERE WE USE INTEGRAL IMAGE!
     % >> code to compute the area of regions C and E <<
-    %     area_C = ...
-    %     area_D = ...
-    %     area_E = ...
+    area_C = S(y+d3+h2,x+d4+w2) - S(y+d3,x+d4+w2) - S(y+d3+h2,x+d4) + S(y+d3,x+d4);
+    area_D = S(y+d3+h2,x+d4+w2+w3) - S(y+d3,x+d4+w2+w3) - S(y+d3+h2,x+d4+w2) + S(y+d3,x+d4+w2);
+    area_E = S(y+d3+h2,x+d4+2*w2+w3) - S(y+d3,x+d4+2*w2+w3) - S(y+d3+h2,x+d4+w2+w3) + S(y+d3,x+d4+w2+w3);
     
     % compute features value
     F1 = area_B - area_A;
@@ -227,7 +228,8 @@ end
 features_train = [FEAT_FACE; FEAT_NON_FACE];
 Group = [repmat(1, length(FEAT_FACE), 1); repmat(2, length(FEAT_NON_FACE), 1)];
 % Call the function knnclassify
-% >> code here <<
+Mdl = fitcknn(features_train, Group);
+labels = predict(Mdl, FEAT_TEST);
 
 
 %% Visualize samples in the feature space
@@ -241,13 +243,31 @@ ylabel('Feature 2');
 title('Feature space');
 
 % Second, visualize the test samples in two different colors
-% >> code here <<
+figure()
+subplot(
+hold on
+scatter(FEAT_TEST(labels==1,1), FEAT_TEST(labels==1,2), 'g')
+scatter(FEAT_TEST(labels==2,1), FEAT_TEST(labels==2,2), 'r')
+xlabel('Feature 1');
+ylabel('Feature 2');
+title('Classification of points in test set')
+
 
 
 %% Visualize classification results in the test image
 
-% Visualize image 'NASA2.bmp' with used regions
-% >> code here <<
+figure(4);
+imshow(I);
+
+% patches with faces
+colors = 'gr';
+for i = 1:size(XY_TEST,1)
+    PATCH = [XY_TEST(i,:) L L];
+    Rectangle = [PATCH(1) PATCH(2); PATCH(1)+PATCH(3) PATCH(2); PATCH(1)+PATCH(3) PATCH(2)+PATCH(4); PATCH(1)  PATCH(2)+PATCH(4); PATCH(1) PATCH(2)];
+    hold on;
+    plot (Rectangle(:,1), Rectangle(:,2), colors(labels(i)));
+    hold off;
+end
 
 end
 

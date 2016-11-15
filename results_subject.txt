@@ -1,0 +1,31 @@
+Results using only 5 subjects
+
+Error PCA: 26.1538%
+
+confusion_pca =
+
+    21     4     0     0     0
+     4    10     3     3     0
+     1     5    20     0     4
+     0     6     3    23     0
+     0     1     0     0    22
+
+Error PCA95: 2.3077%
+
+confusion_pca95 =
+
+    25     0     0     0     0
+     0    25     0     0     0
+     0     0    25     0     0
+     1     1     0    26     0
+     0     0     1     0    26
+
+Error LDA: 0.76923%
+
+confusion_lda =
+
+    26     0     0     1     0
+     0    26     0     0     0
+     0     0    26     0     0
+     0     0     0    25     0
+     0     0     0     0    26

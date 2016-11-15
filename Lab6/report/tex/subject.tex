@@ -6,6 +6,12 @@ $ \bullet $ Knowing that the AR-Face database has several instances (photos) of 
 same subject, how do you have to distribute the samples in the fold-cross
 validation strategy for the subject recognition problem?
 
+Unlike before, now we want examples of the same subject in both in the training set and the test set: if there are no examples of a certain subject in the training set, then there is no way for the classifier to correctly recognize him in the test set and the goodness of the classifier cannot be ascertained; if there are no examples of a certain subject in the test set, then the performance of the classifier cannot be tested against such individual.
+
+Therefore, an option for distributing the images in the fold-cross is alternating the images of the different subjects (e.g. the first picture of all the individuals, followed by the second photo of all the individuals and so on and so forth).
+
+Another option (which is the one we have picked for the optional exercise) is to just distribute the pictures randomly. If the $ F $ parameter is large enough (say greater than 10) then it is highly unlikely that one subject is absent from either the training or the test set. Notice that when $ F = N $, we are performing LOOCV (Leave-One Out Cross Validation). In such a case, then our premise is guaranteed.
+
 \subsection{Optional exercise}
 
 {\bfseries \emph{Questions:}}
@@ -17,4 +23,67 @@ need to do when changing to the subject recognition problem.
 \item Include error measure and confusion matrices to illustrate the results and
 conclusions for the methods.
 \item Comment the particularities of this problem.
+
+One of the most important changes is in the labels. Now, instead of considering the gender as the target, we consider the subject. Another important change is how the confusion matrix is computed. Since now there are more than two classes (say, $ C $), we have to deal with a $ C \times C $ confusion matrix. To perform this computation, we assume that the ids of the subjects are correlative. This is not the case in general, but it is when we consider just the first 5 subjects.
+
+The results are consistent with the previous sections. LDA turns out to outperform the other methods, both when tested against the whole database (without computing the confusion matrix) and when tested with the first 5 subjects.
+
+The errors for the whole database are:
+\begin{itemize}
+	\item Error PCA: $72.7879 \%$
+	\item Error PCA95: $24.9899 \%$
+	\item Error LDA: $0.72727 \%$
+\end{itemize}
+
+The results for the 5 first subject are significantly different in terms of the absolute accuracy (which is understandable, since there are less subjects and the probability of classifying one wrongly is smaller), but the classifier ranking is the same (first LDA, then PCA95 and then PCA). The confusion matrices can be seen at tables \ref{tab:confusionpca}, \ref{tab:confusionpca95} and \ref{tab:confusionlda}. The error (1 minus the accuracy, which can be inferred from these tables) is as follows:
+\begin{itemize}
+	\item Error PCA: $ 26.2 \%$
+	\item Error PCA95: $ 2.3 \%$
+	\item Error LDA: $0.77 \%$
+\end{itemize}
+
+\begin{table}[]
+\centering
+\caption[Confusion matrix for PCA and 5 subjects]{Confusion matrix for PCA and 5 subjects. Columns represent recognized class, and rows represent real class }
+\label{tab:confusionpca}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+21 & 4  & 0  & 0  & 0  \\ \hline
+4  & 10 & 3  & 3  & 0  \\ \hline
+1  & 5  & 20 & 0  & 4  \\ \hline
+0  & 6  & 3  & 23 & 0  \\ \hline
+0  & 1  & 0  & 0  & 22 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Confusion matrix for PCA95 and 5 subjects}
+\label{tab:confusionpca95}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+25 & 0  & 0  & 0  & 0  \\ \hline
+0  & 25 & 0  & 0  & 0  \\ \hline
+0  & 0  & 25 & 0  & 0  \\ \hline
+1  & 1  & 0  & 26 & 0  \\ \hline
+0  & 0  & 1  & 0  & 26 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Confusion matrix for LDA and 5 subjects}
+\label{tab:confusionlda}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+26 & 0  & 0  & 1  & 0  \\ \hline
+0  & 26 & 0  & 0  & 0  \\ \hline
+0  & 0  & 26 & 0  & 0  \\ \hline
+0  & 0  & 0  & 25 & 0  \\ \hline
+0  & 0  & 0  & 0  & 26 \\ \hline
+\end{tabular}
+\end{table}
+
+The validation has been performed with a fold equal to the number of examples (this is, we have done LOOCV).
+
 \end{itemize}

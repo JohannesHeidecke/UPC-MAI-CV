@@ -1,4 +1,4 @@
-function [error] = fold_validation_subject(features, labels, NFolds)
+function [error, confusion] = fold_validation_subject(features, labels, NFolds)
 % FOLD VALIDATION SUBJECT: compute the classification rates of validation after
 %classification.
 % Inputs:
@@ -13,19 +13,23 @@ function [error] = fold_validation_subject(features, labels, NFolds)
 
 % We assume that all the subjects have the same number of images samples:
 NOcc = sum(labels==labels(1));
-NSubjects = length(labels);
-NTest = floor(NSubjects/NFolds);
+NTotal = length(labels);
+NTest = floor(NTotal/NFolds);
+NSubjects = NTotal/NOcc;
 
 %% Randomly sort the data set before validation
-p=randperm(NSubjects);
+p=randperm(NTotal);
 labels = labels(p);
 features = features(:,p);
 
 error = zeros(NFolds,1);
+
+confusion = zeros(NSubjects);
+
 %% Loop of NFolds
 for i = 1:NFolds
     
-    select = false(NSubjects,1);
+    select = false(NTotal,1);
     
     if i==NFolds
         select((i-1)*NTest+1:end) = true;  
@@ -72,7 +76,11 @@ for i = 1:NFolds
     k=2;
     idx = knnclassify(TestSet', TrainSet', TrainLabels', k);
     Result_labels=idx';
-        
+    
+    for j = 1:NTest
+        confusion(Result_labels(j), TestLabel(j)) = confusion(Result_labels(j), TestLabel(j)) + 1;
+    end
+    
     % Compute the classification rates
     error(i) = sum(Result_labels ~= TestLabel)/NTest;
 

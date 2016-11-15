@@ -57,17 +57,22 @@ mat_features_lda = feature_extraction('LDA', images, labels);
 % Call the function validation to perform the F-fold
 % cross validation with: the samples, labels, information
 % about the training set subjects and F the number of folds.
+% We use a limited set of subjects to build the confusion matrix
+% We set F to N (LOOCV)
 
 % Turn off warnings for deprecated KNNCLASSIFY:
 warning('off', 'bioinfo:knnclassify:incompatibility');
 
-F = 50;
-error_pca = fold_validation_subject(mat_features_pca', labels', F);
+F = 5*26;
+[error_pca, confusion_pca] = fold_validation_subject(mat_features_pca(1:F,:)', labels(1:F)', F);
 display(['Error PCA: ', num2str(mean(error_pca)*100), '%']);
-error_pca95 = fold_validation_subject(mat_features_pca95', labels', F);
+display(confusion_pca)
+[error_pca95, confusion_pca95] = fold_validation_subject(mat_features_pca95(1:F,:)', labels(1:F)', F);
 display(['Error PCA95: ', num2str(mean(error_pca95)*100), '%']);
-error_lda = fold_validation_subject(mat_features_lda', labels', F);
+display(confusion_pca95)
+[error_lda, confusion_lda] = fold_validation_subject(mat_features_lda(1:F,:)', labels(1:F)', F);
 display(['Error LDA: ', num2str(mean(error_lda)*100), '%']);
+display(confusion_lda)
 
 end
 

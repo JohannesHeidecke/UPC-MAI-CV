@@ -2,6 +2,7 @@
 *.log
 *.toc
 *.lof
+*.lot
 *.blg
 *.bbl
 *.out

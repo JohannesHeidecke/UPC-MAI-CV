@@ -1,4 +1,6 @@
 function kmeans_exercise()
+% Authors: J. Heidecke & A. Suarez
+
 
 %% Prepare environment
 close all hidden; clear; clc

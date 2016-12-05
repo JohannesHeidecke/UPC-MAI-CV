@@ -10,7 +10,7 @@ function mshift_exercise()
     %% Read and show image
 
     I = imread('animals.jpg');
-%     I = imresize(I, 0.25);
+    %I = imresize(I, 0.25);
 
     %% Show image and let user decide the optimum value for K
 
@@ -23,7 +23,7 @@ function mshift_exercise()
 
     %% Show results
     
-    show_results(size(I,2), size(I,1), labels, colors')
+    show_results(I, labels, colors')
     
 end
 

@@ -1,7 +1,11 @@
-\section{Exercise 1}
+\section{k-means segmentation}
 
-This is exercise 1.
-
-\subsection{Some subsection}
-
-This belongs to a subactivity inside exercise 1.
+The algorithm may or may not be deterministic depending upon the choice of
+parameters. The default initialization method, \emph{kmeans++}, is
+stochastic (although it
+applies a certain heuristic in order for having the initial cluster as far
+apart as possible). The other named methods (\emph{sample}, \emph{uniform},
+\emph{cluster}) are stochastic as well. There is an additional initialization
+method which consists in accepting from the user a matrix with the clusters' centroids.
+Should these clusters be decided deterministically the algorithm will perform
+the same steps at each run.

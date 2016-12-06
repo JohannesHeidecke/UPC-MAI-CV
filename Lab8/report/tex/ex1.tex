@@ -14,13 +14,13 @@ The parameters to evaluate are the following:
 	
 	\item $\lambda$: Controls the proportion of the balloon force. The model expands for $\lambda > 0$ and contracts for $\lambda < 0$.
 	
-	\item $\kappa$: Controls the proportion of the external force that stops the model when arriving at edges. High values of $\kappa$ make the model stop at weaker edges.
+	\item $\kappa$: Controls the proportion of the external force that stops the model when arriving at edges. High values of $\kappa$ make the model stop at weaker edges. In our case we set $ \kappa $ to $ \frac{\kappa'}{\max (G_x, G_y)} $, being $ G_x $ and $ G_y $ the components of the force field. We tweak $ \kappa' $ instead of $ \kappa $ itself.
 	
 	\item $maxstep$: Defines the maximum step size in pixel, aimed at minimizing unwanted crossing-over.
 	
 \end{itemize}
 
-In the following we examine the effects of changing the value of the different parameters. We try to examine optimal and critical values. We keep a base configuration set of $(\alpha , \beta , \lambda , \kappa , maxstep) = (0.1 , 0.01 , 0.05 , 0.2 , 0.4)$ and then change individual parameter values while keeping the others invariant.
+In the following we examine the effects of changing the value of the different parameters. We try to examine optimal and critical values. We keep a base configuration set of $(\alpha , \beta , \lambda , \kappa' , maxstep) = (0.1 , 0.01 , 0.05 , 0.2 , 0.4)$ and then change individual parameter values while keeping the others invariant.
 
 \subsubsection{Alpha}
 
@@ -30,7 +30,7 @@ The parameter $\alpha$ controls the elasticity of the model. The given value of 
 \subfigure[$\alpha=0.02$]{\includegraphics[width=40mm]{img/a0_02}}
 \subfigure[$\alpha=0.05$]{\includegraphics[width=40mm]{img/a0_05}}
 \subfigure[$\alpha=0.1$]{\includegraphics[width=40mm]{img/a0_1}}
-\caption{$\alpha \leq 0.1$}
+\caption{Heart: tweaking the values of $ \alpha $. $\alpha \leq 0.1$}
 \label{fig:alpha_leq}
 \end{figure}
 
@@ -41,7 +41,7 @@ Our experiments show almost no change when increasing $\alpha$ to $0.15$. A valu
 \subfigure[$\alpha=0.1$]{\includegraphics[width=40mm]{img/a0_1}}
 \subfigure[$\alpha=0.15$]{\includegraphics[width=40mm]{img/a0_15}}
 \subfigure[$\alpha=0.2$]{\includegraphics[width=40mm]{img/a0_2}}
-\caption{$\alpha \geq 0.1$}
+\caption{Heart: tweaking the values of $ \alpha $. $\alpha \geq 0.1$}
 \label{fig:alpha_geq}
 \end{figure}
 
@@ -54,7 +54,7 @@ The parameter $\beta$ controls the rigidity of the model. As figure \ref{fig:bet
 \subfigure[$\beta=0$]{\includegraphics[width=40mm]{img/b0_0}}
 \subfigure[$\beta=0.0001$]{\includegraphics[width=40mm]{img/b0_0001}}
 \subfigure[$\beta=0.01$]{\includegraphics[width=40mm]{img/b0_01}}
-\caption{$\beta \leq 0.01$}
+\caption{Heart: tweaking the values of $ \beta $. $\beta \leq 0.01$}
 \label{fig:beta_leq}
 \end{figure}
 
@@ -65,20 +65,20 @@ Increasing $\beta$ to $0.55$ shows a more rigid shape with less defined curves. 
 \subfigure[$\beta=0.01$]{\includegraphics[width=40mm]{img/b0_01}}
 \subfigure[$\beta=0.55$]{\includegraphics[width=40mm]{img/b0_55}}
 \subfigure[$\beta=0.65$]{\includegraphics[width=40mm]{img/b0_65}}
-\caption{$\beta \geq 0.01$}
+\caption{Heart: tweaking the values of $ \beta $. $\beta \geq 0.01$}
 \label{fig:beta_geq}
 \end{figure}
 
 \subsubsection{Kappa}
 
-Kappa controls the proportion of the external force which is based on the image's gradient. The higher the absolute value of kappa, the stronger the influence of the external force on the shaping of the model (as opposed to the balloon force, see section \ref{sub:forces}). For high values of kappa, the model will stop at very weak edges. Our experiments show that the initial value of $0.2$ is near optimal. When decreasing kappa to $0.18$, the shape over-extends a little on the top part where the gradient of the surrounding shape is not yet strong enough. Further decreasing to $0.16$ leads to a critical value where the model fails to stop at the relevant edges and outgrows the entire area. See figure \ref{fig:kappa_leq}.
+(\textbf{NOTE}: Any numerical value mentioned here actually refers to $ \kappa' $) Kappa controls the proportion of the external force which is based on the image's gradient. The higher the absolute value of kappa, the stronger the influence of the external force on the shaping of the model (as opposed to the balloon force, see section \ref{sub:forces}). For high values of kappa, the model will stop at very weak edges. Our experiments show that the initial value of $0.2$ is near optimal. When decreasing kappa to $0.18$, the shape over-extends a little on the top part where the gradient of the surrounding shape is not yet strong enough. Further decreasing to $0.16$ leads to a critical value where the model fails to stop at the relevant edges and outgrows the entire area. See figure \ref{fig:kappa_leq}.
 
 \begin{figure}[!hbt]
 \centering   
 \subfigure[$\kappa=0.16$]{\includegraphics[width=40mm]{img/k0_16}}
 \subfigure[$\kappa=0.18$]{\includegraphics[width=40mm]{img/k0_18}}
 \subfigure[$\kappa=0.2$]{\includegraphics[width=40mm]{img/k0_2}}
-\caption{$\kappa \leq 0.2$}
+\caption{Heart: tweaking the values of $ \kappa $. $\kappa \leq 0.2$}
 \label{fig:kappa_leq}
 \end{figure}
 
@@ -89,7 +89,7 @@ As figure \ref{fig:kappa_geq} shows, increasing kappa above the initial value of
 \subfigure[$\kappa=0.2$]{\includegraphics[width=40mm]{img/k0_2}}
 \subfigure[$\kappa=0.4$]{\includegraphics[width=40mm]{img/k0_4}}
 \subfigure[$\kappa=1000$]{\includegraphics[width=40mm]{img/k1000}}
-\caption{$\kappa \geq 0.2$}
+\caption{Heart: tweaking the values of $ \kappa $. $\kappa \geq 0.2$}
 \label{fig:kappa_geq}
 \end{figure}
 
@@ -102,7 +102,7 @@ Lambda defines the weight of the balloon force, as opposed to the external force
 \subfigure[$\lambda=0.02$]{\includegraphics[width=40mm]{img/l0_02}}
 \subfigure[$\lambda=0.04$]{\includegraphics[width=40mm]{img/l0_04}}
 \subfigure[$\lambda=0.05$]{\includegraphics[width=40mm]{img/l0_05}}
-\caption{$\lambda \leq 0.05$}
+\caption{Heart: tweaking the values of $ \lambda $. $\lambda \leq 0.05$}
 \label{fig:lambda_leq}
 \end{figure}
 
@@ -113,7 +113,7 @@ As figure \ref{fig:lambda_geq} shows, even just slightly increasing lambda to $0
 \subfigure[$\lambda=0.05$]{\includegraphics[width=40mm]{img/l0_05}}
 \subfigure[$\lambda=0.055$]{\includegraphics[width=40mm]{img/l0_055}}
 \subfigure[$\lambda=0.06$]{\includegraphics[width=40mm]{img/l0_06}}
-\caption{$\lambda \geq 0.05$}
+\caption{Heart: tweaking the values of $ \lambda $. $\lambda \geq 0.05$}
 \label{fig:lambda_geq}
 \end{figure}
 
@@ -126,16 +126,17 @@ Increasing maxstep did not lead to any changes of the segmentation's results in 
 \subfigure[$maxstep=0.001$]{\includegraphics[width=40mm]{img/m0_001}}
 \subfigure[$maxstep=0.01$]{\includegraphics[width=40mm]{img/m0_01}}
 \subfigure[$maxstep=0.4$]{\includegraphics[width=40mm]{img/m0_4}}
-\caption{$maxstep \leq 0.4$}
+\caption{Heart: tweaking the values of maxstep. $maxstep \leq 0.4$}
 \label{fig:max_leq}
 \end{figure}
 
 \subsection{Forces of the Segmentation}
 \label{sub:forces}
 
-There are different forces at work that control the growing of the model. The curves are drawn toward edges by the potential force, defined as the negative gradient of a potential function, in this case the gradients of the image. Together with the balloon force, that pushes the model to expand (for positive $\lambda$) or contract (for negative $\lambda$), the potential force forms the external force. At the same time, internal forces define the properties of the model: trying to keep the points of the model close together (elasticity) and avoiding bending too much (rigidity). 
+There are different forces at work that control the growing of the model. The curves are drawn toward edges by the potential force, defined as the negative gradient of a potential function, in this case the gray scale image smoothed with a Gaussian kernel. Together with the balloon force, that pushes the model to expand (for positive $\lambda$) or contract (for negative $\lambda$), the potential force contributes to the external force. At the same time, internal forces define the properties of the model: trying to keep the points of the model close together (elasticity) and avoiding bending too much (rigidity). 
 
-We can visualize the potential force field of the heart image for both the x and y dimensions:
+We can visualize the potential force field of the heart image for both the x and y dimensions in figure
+\ref{fig:ffhx}
 
 \begin{figure}[!hbt]
 \centering   
@@ -145,11 +146,5 @@ We can visualize the potential force field of the heart image for both the x and
 \label{fig:ffhx}
 \end{figure}
 
-Depending on the weights $\kappa$ and $\lambda$, the external force is a combination of the potential force visualized in figure \ref{fig:ffhx} and the balloon force.
-
-
-\section{Image Segmentation by Active Contour Models in Noisy Images}
-
-
-
-
+As said before, the external force is a combination of the potential force visualized in figure \ref{fig:ffhx} and the balloon force, and the weight of each component is controlled by means of the
+$\kappa$ and $\lambda$ parameters.

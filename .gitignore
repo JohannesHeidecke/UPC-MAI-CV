@@ -13,6 +13,7 @@
 *.dvi
 *.zip
 *.tcp
+*.tps
 *~
 *.texpadtmp*
 *vlfeat-0.9.16*

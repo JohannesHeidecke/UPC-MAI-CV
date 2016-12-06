@@ -20,7 +20,8 @@ f = f-min(f(:));  f = f/max(f(:));
 [px,py] = gradient(-f);
 kappa=1/max(abs( [px(:) ; py(:)])) ;
 % alpha,beta,kappa, lambda
-[xN,yN]=snake(x,y,0.1,0.01,0.2*kappa,0.06,px,py,0.4,1,img);
+% [x,y]=snake(x,y,0.1,0.01,0.2*kappa,0.05,px,py,0.4,1,img);
+[xN,yN]=snake(x,y,0.1,0.01,0.2*kappa,0.05,px,py,99999999999,1,img);
 
 
 figure(3) ;
@@ -28,4 +29,12 @@ clf ; imagesc(img) ; colormap(gray) ; hold on ;
 axis image ; axis off ;
 plot([xN;xN(1)],[yN;yN(1)],'r','LineWidth',2) ; hold off ;
 
+pxN = (px - min(min(px))) * (1.0 / (max(max(px)) - min(min(px))));
+pyN = (py - min(min(py))) * (1.0 / (max(max(py)) - min(min(py))));
+
+figure;
+subplot(1,2,1);
+imshow(pxN);
+subplot(1,2,2);
+imshow(pyN);
 

@@ -21,6 +21,7 @@ function [x,y] = snake(x,y,alpha,beta,kappa, lambda, fx,fy,maxstep, displ,img)
 %
 % Usage: [x,y] = snake(x,y,alpha,beta,kappa,lambda,fx,fy,maxstep)
 % Inputs:
+
 %   x, y  [N x 1]  Vectors containing the x and y
 %     coordinates of the initial snake position. The snake is
 %     closed - the last point is considered a neighbor of the first.
@@ -28,23 +29,29 @@ function [x,y] = snake(x,y,alpha,beta,kappa, lambda, fx,fy,maxstep, displ,img)
 %     interpolated as needed. The contour should be given 
 % clockwise (with respect to Matlab image axis conventions),
 %     otherwise the balloon force will change sign.
+
 %   alpha  [1 x 1]  alpha controls the elasticity;
 %     the higher the value, the less stretching the snake
 %     will allow. alpha 0.1 is a good value.
+
 %   beta  [1 x 1]  beta controls the rigidity, the
 %     resistance to bending. Make it small for the snake to follow
 %     a jagged boundary, beta=0  to  0.1 works well.
+
 %   kappa  [1 x 1]  kappa weights the contribution
 %     of the external force f_ that  stops
 %     the snake once it arrives at the desired boundary. Make
 %     kappa bigger for the snake to stop sooner.
 %     kappa=0.1  to  0.5 give good results.
+
 %   lambda  [1 x 1]  lambda weights the contribution of the balloon
 %     force. Positive values make the snake expand. lambda
 %     0.05 works well.  
+
 %   fx, fy  [m x n]  External force field, normalized to 
 %    maximum magnitude 1. Both fx and fy are
 %     scalar matrices corresponding to the original image.
+
 %   maxstep  (default 0.4)
 %            Maximum step-size in pixels. 
 %     Reducing it in difficult cases might help to prevent the snake from

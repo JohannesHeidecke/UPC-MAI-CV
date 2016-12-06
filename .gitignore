@@ -12,6 +12,7 @@
 *.synctex.gz
 *.dvi
 *.zip
+*.tcp
 *~
 *.texpadtmp*
 *vlfeat-0.9.16*

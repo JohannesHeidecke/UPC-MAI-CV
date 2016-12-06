@@ -7,23 +7,41 @@ close all hidden; clear; clc
 
 addpath(genpath('images'))
 
-%% Read and show image
+%% Read and show image. Apply transformations (if that applies)
 
 I = imread('animals.jpg');
+%I = imread('alwin2.jpg');
+%I = imread('bigbangfamily.png');
 
-%% Show image and let user decide the optimum value for K
+%I = imrotate(I,90);
+%I = imresize(I,0.5);
+%I = imresize(I,2);
+
+%% Show image and let user decide the value for K
 
 imshow(I)
 % K = input('Choose optimum K: '); % Comment this if you want to fix the K value
 K = 10; % Uncomment this if you want to fix the K value
 
+%% Let the user decide whether he wants to include the spatial coordinates or not
+
+% include_spatial = input('Include spatial coordinates? (0/1): '); % Comment this to fix the value
+include_spatial = 0; % Uncomment this to fix the value
+
 %% Execute the KMeans algorithm
 
 data = double(reshape(I, size(I,1)*size(I,2), 3));
+
+if include_spatial
+    spatial_coordinates = generate_spatial_coordinates(size(I,2), size(I,1));
+    data = [data, spatial_coordinates];
+end
+
 [labels, colors] = kmeans(data, K);
 
-%% Show colored labels 
+%% Show labels (in gray scale) and colored
 
-show_results(size(I,2), size(I,1), labels, colors*255)
+figure
+show_results(I, labels, colors)
 
 end

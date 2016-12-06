@@ -1,0 +1,10 @@
+\section{Mean-shift segmentation}
+
+The algorithm is not deterministic because at each update step the next
+point to update (i.e. move towards the mean of its neighbourhood
+centered in that point) is selected randomly. This is done in the 
+line 47 of the provided \texttt{MeanShiftCluster.m} file
+(\texttt{tempInd = ceil( (numInitPts-1e-6)*rand);}).
+This also means that two executions of the Mean-shift algorithm do
+not yield necessarily the same value
+(unless the seed of the random generator is fixed).

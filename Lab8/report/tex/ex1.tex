@@ -3,6 +3,7 @@
 Active Contour Models (also called ``snakes'') depend on adequately set parameters in order to work as desired. In this section we observed the effect of changing the parameters' values when trying to segment the outline of a heart from an image.
 
 \subsection{Parameter Experiments}
+\label{sub:params}
 
 The parameters to evaluate are the following:
 
@@ -14,7 +15,7 @@ The parameters to evaluate are the following:
 	
 	\item $\lambda$: Controls the proportion of the balloon force. The model expands for $\lambda > 0$ and contracts for $\lambda < 0$.
 	
-	\item $\kappa$: Controls the proportion of the external force that stops the model when arriving at edges. High values of $\kappa$ make the model stop at weaker edges. In our case we set $ \kappa $ to $ \frac{\kappa'}{\max (G_x, G_y)} $, being $ G_x $ and $ G_y $ the components of the force field. We tweak $ \kappa' $ instead of $ \kappa $ itself.
+	\item $\kappa$: Controls the proportion of the external force that stops the model when arriving at edges. High values of $\kappa$ make the model stop at weaker edges. In our case we set $ \kappa $ to $ \frac{\kappa'}{\max (G_x, G_y)} $, with $ G_x $ and $ G_y $ being the components of the force field. We tweak $ \kappa' $ instead of $ \kappa $ itself.
 	
 	\item $maxstep$: Defines the maximum step size in pixel, aimed at minimizing unwanted crossing-over.
 	
@@ -71,7 +72,9 @@ Increasing $\beta$ to $0.55$ shows a more rigid shape with less defined curves. 
 
 \subsubsection{Kappa}
 
-(\textbf{NOTE}: Any numerical value mentioned here actually refers to $ \kappa' $) Kappa controls the proportion of the external force which is based on the image's gradient. The higher the absolute value of kappa, the stronger the influence of the external force on the shaping of the model (as opposed to the balloon force, see section \ref{sub:forces}). For high values of kappa, the model will stop at very weak edges. Our experiments show that the initial value of $0.2$ is near optimal. When decreasing kappa to $0.18$, the shape over-extends a little on the top part where the gradient of the surrounding shape is not yet strong enough. Further decreasing to $0.16$ leads to a critical value where the model fails to stop at the relevant edges and outgrows the entire area. See figure \ref{fig:kappa_leq}.
+(\textbf{NOTE}: Any numerical value mentioned here actually refers to $ \kappa' $, see section \ref{sub:params}). 
+
+Kappa controls the proportion of the external force which is based on the image's gradient. The higher the absolute value of kappa, the stronger the influence of the external force on the shaping of the model (as opposed to the balloon force, see section \ref{sub:forces}). For high values of kappa, the model will stop at very weak edges. Our experiments show that the initial value of $0.2$ is near optimal. When decreasing kappa to $0.18$, the shape over-extends a little on the top part where the gradient of the surrounding shape is not yet strong enough. Further decreasing to $0.16$ leads to a critical value where the model fails to stop at the relevant edges and outgrows the entire area. See figure \ref{fig:kappa_leq}.
 
 \begin{figure}[!hbt]
 \centering   
@@ -140,8 +143,8 @@ We can visualize the potential force field of the heart image for both the x and
 
 \begin{figure}[!hbt]
 \centering   
-\subfigure[x dimension]{\includegraphics[width=60mm]{img/forcef_heart_x.png}}
-\subfigure[y dimension]{\includegraphics[width=60mm]{img/forcef_heart_y.png}}
+\subfigure[x-dimension]{\includegraphics[width=60mm]{img/forcef_heart_x.png}}
+\subfigure[y-dimension]{\includegraphics[width=60mm]{img/forcef_heart_y.png}}
 \caption{Force Field of Heart Segmentation}
 \label{fig:ffhx}
 \end{figure}

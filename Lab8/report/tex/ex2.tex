@@ -96,7 +96,7 @@ increases the gap between the snake and the bird.
 \end{figure}
 
 In figure \ref{fig:ex2-lambda-tweak} we can appreciate the influence of $\lambda$. We can see
-that its effect is very similar to that of $\kappa$, but inversed (which makes sense attending to
+that its effect is very similar to that of $\kappa$, but inversed (which makes sense looking at
 the meaning of those parameters). A high value (in absolute module) like -0.055 can make the
 algorithm miss the wing completely while a low value makes the snake fit to the wing at the cost
 of increasing the gap. Should this parameter be altered, we would need to modify one or more
@@ -147,15 +147,15 @@ Also like before, the force field is obtained as the gradient of the smoothed gr
 
 \begin{figure}[!hbt]
 \centering   
-\subfigure[x dimension]{\includegraphics[width=60mm]{img/ex2/bird_efx.png}}
-\subfigure[y dimension]{\includegraphics[width=60mm]{img/ex2/bird_efy.png}}
+\subfigure[x-dimension]{\includegraphics[width=60mm]{img/ex2/bird_efx.png}}
+\subfigure[y-dimension]{\includegraphics[width=60mm]{img/ex2/bird_efy.png}}
 \caption{Force field of bird segmentation}
 \label{fig:bird-ff}
 \end{figure}
 
 \subsection{Influence of noise on the segmentation}
 
-We analyse two kinds of noise: Additive White Gaussian noise and salt\&pepper noise. As we shall see, the previous selection of parameters is actually very vulnerable against noise. It is also worth mentioning that the tests were initially performed at 0.25 of the original dimensions, but operating with low resolution images renders to significantly worse results in the presence of noise. Therefore we retrieve the full size image.
+We analyse two kinds of noise: additive white gaussian noise (AWGN) and salt \& pepper noise. As we shall see, the previous selection of parameters is actually very vulnerable against noise. It is also worth mentioning that the tests were initially performed at 0.25 of the original dimensions, but operating with low resolution images renders to significantly worse results in the presence of noise. Therefore we retrieve the full size image.
 
 \subsubsection{Additive White Gaussian Noise (AWGN) }
 

@@ -1,10 +1,13 @@
 img=imread('images/bird.png') ;
 
-s = 0.5; % scale factor. We scale down the image to accelerate a bit the process
+s = 1; % scale factor. We scale down the image to accelerate a bit the process
 
 img = imresize(img, s);
-% img = imnoise(img, 'gaussian', 0, 0.000125); % add white gaussian noise
-img = imnoise(img, 'salt & pepper', 0.00001); % add salt and pepper noise
+% img = imnoise(img, 'gaussian', 0, 0.0156); % add white gaussian noise
+img = imnoise(img, 'salt & pepper', 0.1); % add salt and pepper noise
+img(:,:,1) = medfilt2(img(:,:,1),[5,5]);
+img(:,:,2) = medfilt2(img(:,:,2),[5,5]);
+img(:,:,3) = medfilt2(img(:,:,3),[5,5]);
 
 
 load birdxy
@@ -36,8 +39,9 @@ f=imfilter(double(f),h,'symmetric') ;
 % waitforbuttonpress
 
 kappa=1/(max(max(px(:)),max(py(:)))) ;
-[x_,y_]=snake(x,y,0.1,0.1,0.3*kappa,-0.05,px,py,0.1,0,f);
-% [x_,y_]=snake(x,y,0.1,0.1,0.4*kappa,-0.08,px,py,0.2,0,f);
+% [x_,y_]=snake(x,y,0.1,0.1,0.3*kappa,-0.05,px,py,0.1,0,f);
+%[x_,y_]=snake(x,y,0.1,0.03,0.8*kappa,-0.08,px,py,0.4,0,f);
+[x_,y_]=snake(x,y,0.3,0.3,0.6*kappa,-0.08,px,py,0.15,0,f);
 % [x_,y_]=snake(x,y,0.1,0.1,0.8*kappa,-0.08,px,py,0.4,0,f);
 clf ; imagesc(img) ;  axis image ; axis off ; hold on ;
 plot([x_;x_(1)],[y_;y_(1)],'r','LineWidth',2) ; hold off ;

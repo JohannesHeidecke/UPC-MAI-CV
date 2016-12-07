@@ -16,7 +16,7 @@ others are fixed in their default values. The default values are, for this image
 \[ (\alpha , \beta , \kappa' , \lambda , \mathrm{maxstep} ) = (0.1, 0.1, 0.3, -0.05, 0.4) \]
 
 One of the most important changes with respect to the previous case is that now the snake is
-shrinking instead of expanding (hence the negativa $ \lambda $ value).
+shrinking instead of expanding (hence the negative $ \lambda $ value).
 
 \subsubsection{Alpha}
 
@@ -155,39 +155,53 @@ Also like before, the force field is obtained as the gradient of the smoothed gr
 
 \subsection{Influence of noise on the segmentation}
 
-We analyze mainly two kinds of noise: Additive White Gaussian noise and salt\&pepper noise.
+We analyse two kinds of noise: Additive White Gaussian noise and salt\&pepper noise. As we shall see, the previous selection of parameters is actually very vulnerable against noise. It is also worth mentioning that the tests were initially performed at 0.25 of the original dimensions, but operating with low resolution images renders to significantly worse results in the presence of noise. Therefore we retrieve the full size image.
 
 \subsubsection{Additive White Gaussian Noise (AWGN) }
 
-We have observed that the algorithm is very vulnerable to this kind of noise. We start by adding very
-small amount of noise, and then we slowly start increasing it. We start with our ``optimum'' values. The results are shown in figure \ref{fig:awgn}. It can be observed that the algorithm starts giving poor results when the variance of the noise is 0.000125.
+We have observed that the algorithm is very vulnerable to this kind of noise. We start by adding very small amount of noise, and then we slowly start increasing it. At first we use our ``optimum'' values. Figure \ref{fig:awgn} shows how the image is segmented for 0-mean AWGN with different variances. It can be observed that the algorithm starts giving poor results when the variance of the noise is as low as 0.000025.
 
 \begin{figure}[!hbt]
 \centering   
-\subfigure[WGN with mean 0 and variance 0.000001]{\includegraphics[width=45mm]{img/ex2/awgn/0_000001.png}}
-\subfigure[WGN with mean 0 and variance 0.000005]{\includegraphics[width=45mm]{img/ex2/awgn/0_000005.png}}
-\subfigure[WGN with mean 0 and variance 0.000025]{\includegraphics[width=45mm]{img/ex2/awgn/0_000025.png}}
+\subfigure[AWGN with variance 0.000001]{\includegraphics[width=45mm]{img/ex2/awgn/0_000001.png}}
+\subfigure[AWGN with variance 0.000005]{\includegraphics[width=45mm]{img/ex2/awgn/0_000005.png}}
+\subfigure[AWGN with mean 0 and variance 0.000025]{\includegraphics[width=45mm]{img/ex2/awgn/0_000025.png}}
 
-\subfigure[WGN with mean 0 and variance 0.000125]{\includegraphics[width=45mm]{img/ex2/awgn/0_000125.png}}
-\subfigure[WGN with mean 0 and variance 0.000625]{\includegraphics[width=45mm]{img/ex2/awgn/0_000625.png}}
-\caption{Additive White Gaussian Noise}
+\subfigure[AWGN with variance 0.000125]{\includegraphics[width=45mm]{img/ex2/awgn/0_000125.png}}
+\subfigure[AWGN with variance 0.000625]{\includegraphics[width=45mm]{img/ex2/awgn/0_000625.png}}
+\subfigure[AWGN with variance 0.003125]{\includegraphics[width=45mm]{img/ex2/awgn/0_003125.png}}
+
+\subfigure[AWGN with variance 0.0156]{\includegraphics[width=45mm]{img/ex2/awgn/0_0156.png}}
+
+\caption{Segmentation with AWGN}
 \label{fig:awgn}
 \end{figure}
 
-These problems can be solved up to certain extend by tweaking the parameters. In particular, we reduce the maxstep parameter and increase the $\beta$ parameter to avoid twists. We also reduce $\kappa$ to avoid that the snake gets stuck too early in the algorithm. The results (shown in figure  \ref{fig:awgn-countermeasures} are subobptimal, but better than before).
+These problems can be countered up to certain extend by tweaking the parameters even further. In particular, we reduce the maxstep parameter and increase the $\alpha$ and $\beta$ parameter to have a more stiff curve and avoid twists. We also reduce $\kappa$ to avoid that the snake gets stuck too early in false edges. The selected values were at the end:
+
+\[ (\alpha , \beta , \kappa' , \lambda , \mathrm{maxstep} ) = (0.3, 0.3, 0.6, -0.08, 0.15) \]
+
+The segmentation with these parameters are shown in figure \ref{fig:awgn-countermeasures}. Of course with big amounts of noise we obtain a suboptimal segmentation, but nonetheless better than in figure \ref{fig:awgn}.
 
 \begin{figure}[!hbt]
 \centering   
-\subfigure[WGN with mean 0 and variance 0.000125]{\includegraphics[width=45mm]{img/ex2/awgn/0_000125_fixed.png}}
-\subfigure[WGN with mean 0 and variance 0.000625]{\includegraphics[width=45mm]{img/ex2/awgn/0_000625_fixed.png}}
+\subfigure[AWGN with variance 0.000001]{\includegraphics[width=45mm]{img/ex2/awgn/0_000001_fixed.png}}
+\subfigure[AWGN with variance 0.000005]{\includegraphics[width=45mm]{img/ex2/awgn/0_000005_fixed.png}}
+\subfigure[AWGN with mean 0 and variance 0.000025]{\includegraphics[width=45mm]{img/ex2/awgn/0_000025_fixed.png}}
 
-\caption{Additive White Gaussian Noise: countermeasures}
+\subfigure[AWGN with variance 0.000125]{\includegraphics[width=45mm]{img/ex2/awgn/0_000125_fixed.png}}
+\subfigure[AWGN with variance 0.000625]{\includegraphics[width=45mm]{img/ex2/awgn/0_000625_fixed.png}}
+\subfigure[AWGN with variance 0.003125]{\includegraphics[width=45mm]{img/ex2/awgn/0_003125_fixed.png}}
+
+\subfigure[AWGN with variance 0.0156]{\includegraphics[width=45mm]{img/ex2/awgn/0_0156_fixed.png}}
+
+\caption{Segmentation with AWGN: countermeasures}
 \label{fig:awgn-countermeasures}
 \end{figure}
 
 \subsubsection{Salt and pepper}
 
-In this case the situation is more grim than with AWGN. Even with very low densities of salt \& pepper noise the algorithm fails to converge to a solution consistently without the snake twisting over itself. The results are shown in figure \ref{fig:salt-pepper}
+In this case the situation is more grim than with AWGN. Even with very low densities of salt \& pepper noise the algorithm fails to converge to a solution consistently without the snake twisting over itself. The results (with our ``optimal'' values) are shown in figure \ref{fig:salt-pepper}.
 
 \begin{figure}[!hbt]
 \centering   
@@ -195,8 +209,21 @@ In this case the situation is more grim than with AWGN. Even with very low densi
 \subfigure[Salt \& pepper with density 0.0001]{\includegraphics[width=45mm]{img/ex2/saltpepper/0_0001.png}}
 \subfigure[Salt \& pepper with density 0.001]{\includegraphics[width=45mm]{img/ex2/saltpepper/0_001.png}}
 
+\subfigure[Salt \& pepper with density 0.01]{\includegraphics[width=45mm]{img/ex2/saltpepper/0_01.png}}
+\subfigure[Salt \& pepper with density 0.1]{\includegraphics[width=45mm]{img/ex2/saltpepper/0_1.png}}
+
 \caption{Salt \& pepper noise}
 \label{fig:salt-pepper}
 \end{figure}
 
-While tuning the parameters could lead to segment the image correctly in some circumstances, the results were not consistent enough to be of any utility. When dealing with impulsive noise, like in our case, we would recommend applying a median filter first.
+While tuning the parameters could lead to segment the image correctly under some circumstances, the results were not consistent enough to be of any utility. It turns out that salt \& pepper noise is even more pervasive than AWGN for the snakes algorithm. However, if we suspect that there will be salt \& pepper noise in the image we can deal with it easily with a median filter (in general, the median filter gives very good results in the presence of impulsive noise like in our case). To produce the result of figure \ref{fig:salt-pepper-counter-measures} we have applied a median filter with a $5 \times 5$ neighbourhood to a noisy image and then we have executed the snakes algorithm on the filtered image (with the same parameters we used for AWGN). Although the algorithm has missed one of the wings (probably we could get it back with some more fine tuning) the end result is clearly more satisfactory than in figure \ref{fig:salt-pepper}.
+
+\begin{figure}[!hbt]
+\centering
+
+\includegraphics[width=45mm]{img/ex2/saltpepper/0_1_fixed.png}
+
+\caption{Salt \& pepper noise with density 0.1 (10\% of the image) after applying median filter and snakes algorithm}
+\label{fig:salt-pepper-countermeasures}
+
+\end{figure}

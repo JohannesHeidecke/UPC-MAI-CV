@@ -1,1 +1,5 @@
 \section{Exploring the segmentation by level sets}
+
+In both examples (hand and brain) of the \texttt{levelset\_demo.m} the initial level set model is just a circumference that evolves depending on the gradient of the image and that finally adjusts to the desired anatomical feature.
+
+The main difference between the two demonstrations is the initial location of the active contour. In the first example the contour is located in the center of the brain and therefore adjusts to the shape of the two ventricular shapes that are located in the middle. However in \texttt{levelset\_demo2.m} the contour is located outside and therefore it adjusts to the region with biggest area of the brain.

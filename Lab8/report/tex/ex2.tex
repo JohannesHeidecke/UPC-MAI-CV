@@ -119,7 +119,7 @@ Figure \ref{fig:ex2-maxsteps-tweak} shows that the influence of maxsteps is not 
 it is low enough. A value higher than 0.4 does not seem to have a big impact, while values lower
 than 0.01 seems to harm the quality of the result. Later we will see that this parameter can prevent the snake from crossing over, and therefore can be useful in the presence of noise.
 
-\subsubsection{``Optimum values''}
+\subsubsection{``Optimum'' values}
 
 As it can be seen in figure \ref{fig:ex2-alpha-tweak} for
 $ \alpha = 0.1 $ (or for any of the plots in which the tweaked variable takes the default value), the right wing is not correctly segmented when the image
@@ -132,9 +132,9 @@ While these values are not optimum in a mathematical sense, empirically they hav
 
 \begin{figure}[!hbt]
 \centering
-\subfigure[$ \mathrm{maxsteps} = 0.02 $]{\includegraphics[width=45mm]{img/ex2/bird_segmentated_1x.png}}
-\subfigure[$ \mathrm{maxsteps} = 0.01 $]{\includegraphics[width=45mm]{img/ex2/bird_segmentated_half.png}}
-\subfigure[$ \mathrm{maxsteps} = 0.4 $]{\includegraphics[width=45mm]{img/ex2/bird_segmentated_quarter.png}}
+\subfigure[Scale: $ \times 1 $]{\includegraphics[width=45mm]{img/ex2/bird_segmentated_1x.png}}
+\subfigure[Scale: $ \times 0.5 $]{\includegraphics[width=45mm]{img/ex2/bird_segmentated_half.png}}
+\subfigure[Scale: $ \times 0.25 $]{\includegraphics[width=45mm]{img/ex2/bird_segmentated_quarter.png}}
 \caption{Bird: segmentation with ``optimum'' parameters at different scales}
 \label{fig:bird-segmentated}
 \end{figure}
@@ -216,14 +216,16 @@ In this case the situation is more grim than with AWGN. Even with very low densi
 \label{fig:salt-pepper}
 \end{figure}
 
-While tuning the parameters could lead to segment the image correctly under some circumstances, the results were not consistent enough to be of any utility. It turns out that salt \& pepper noise is even more pervasive than AWGN for the snakes algorithm. However, if we suspect that there will be salt \& pepper noise in the image we can deal with it easily with a median filter (in general, the median filter gives very good results in the presence of impulsive noise like in our case). To produce the result of figure \ref{fig:salt-pepper-counter-measures} we have applied a median filter with a $5 \times 5$ neighbourhood to a noisy image and then we have executed the snakes algorithm on the filtered image (with the same parameters we used for AWGN). Although the algorithm has missed one of the wings (probably we could get it back with some more fine tuning) the end result is clearly more satisfactory than in figure \ref{fig:salt-pepper}.
+While tuning the parameters could lead to segment the image correctly under some circumstances, the results were not consistent enough to be of any utility. It turns out that salt \& pepper noise is even more pervasive than AWGN for the snakes algorithm. However, if we suspect that there will be salt \& pepper noise in the image we can deal with it easily with a median filter (in general, the median filter gives very good results in the presence of impulsive noise like in our case). To produce the result of figure \ref{fig:salt-pepper-countermeasures} we have applied a median filter with a $5 \times 5$ neighbourhood to a noisy image and then we have executed the snakes algorithm on the filtered image (with the same parameters we used for AWGN). Although the algorithm has missed one of the wings (probably we could get it back with some more fine tuning) the end result is clearly more satisfactory than in figure \ref{fig:salt-pepper}.
 
 \begin{figure}[!hbt]
 \centering
 
 \includegraphics[width=45mm]{img/ex2/saltpepper/0_1_fixed.png}
 
-\caption{Salt \& pepper noise with density 0.1 (10\% of the image) after applying median filter and snakes algorithm}
+\caption{Segmentation with salt \& pepper noise with density 0.1 (10\% of the image) after applying median filter and snakes algorithm}
 \label{fig:salt-pepper-countermeasures}
 
 \end{figure}
+
+\FloatBarrier

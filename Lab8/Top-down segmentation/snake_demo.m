@@ -102,6 +102,8 @@ end
 % It can be partly eliminated by using less smoothing at the expense of
 % robustness. 
 
+%% Bird
+
 if 1, 
 img=imread([ ImageDir 'bird.png']) ;
 
@@ -127,6 +129,10 @@ axis image ; axis off ;
 exportfig(gcf,'output_images/snake_energy2.eps') ;
 
 [px,py] = gradient(-f);
+pxy = px.^2 + py.^2;
+pxy = pxy/max(max(pxy));
+imshow(pxy);
+waitforbuttonpress
 kappa=1/(max(max(px(:)),max(py(:)))) ;
 [x,y]=snake(x,y,0.1,0.1,0.3*kappa,-0.05,px,py,0.4,1,f);
 

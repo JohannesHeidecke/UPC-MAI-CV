@@ -1,3 +1,12 @@
-\section{Annex}
+\section{Source code}
 
-Some text in the annex.
+For the present report we have made use of the \texttt{phow\_caltech101.m} script provided in the \texttt{apps} folder of the \texttt{vlfeat} toolbox. To extract some of the results presented here, we have modified the script in place.
+
+Apart from that and for the very first part of the report (the image classification and feedback by means of a colored frame) has been done by means of the following functions:
+
+\begin{itemize}
+\item \texttt{classify\_and\_show.m}: Given a category (as a string), an image file name (e.g. \texttt{image\_0001.jpg}) and a model classifies the image using the provided model. Then show the image with a green frame if it was correctly classified, and with a red frame if it was not. The title of the image shows what has been ascertained vs the ground truth.
+\item \texttt{ex1.m}: it loads \texttt{tiny-model.mat} which contains the parameters of the latest trained ``tiny'' model (the \texttt{phow\_caltech101.m} has to be executed first). Then it starts loading and classifying the images from the categories the model has been trained for. It uses the \emph{classify\_and\_show} method described above.
+\end{itemize}
+
+We refer the reader to the source code for more details.

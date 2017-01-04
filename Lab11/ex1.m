@@ -7,8 +7,6 @@ addpath '../../vlfeat-0.9.16/apps'
 %% Run BOW demo
 phow_caltech101
 
-
-
 %% Load model and classify images in folders
 
 model = load(['data/', 'tiny', '-model.mat']);

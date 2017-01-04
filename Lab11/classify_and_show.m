@@ -1,4 +1,7 @@
 function classify_and_show(model, category, image)
+% Loads an image from a given category and classifies it using the provided
+% model. Then it shows the image with a green/red frame depending on whether
+% the class has been correctly inferred or not.
     im = imread(['data/caltech-101/101_ObjectCategories/', category, '/', image]);
     
     %% Standarize image

@@ -13,13 +13,14 @@ function main
 
    % showHorVerHistograms(F);
    
-   [RsF fsF] = getClassFeatures('forest', '.jpg', F);
-   [RsB fsB] = getClassFeatures('buildings', '.jpg', F);
-   [RsS fsS] = getClassFeatures('sunset', '.jpg', F);
+   featureModes = [1 0 0 0 0 1];
+   [RsF fsF] = getClassFeatures('forest', '.jpg', F, featureModes);
+   [RsB fsB] = getClassFeatures('buildings', '.jpg', F, featureModes);
+   [RsS fsS] = getClassFeatures('sunset', '.jpg', F, featureModes);
      
    % visualizeFeatures(RsF, RsB, RsS, [1 17 45]);
    % visualizeFeatures(RsF, RsB, RsS, [41 25]);
-   visualizeFeatures(RsF, RsB, RsS, [41 25 38]);
+   %visualizeFeatures(RsF, RsB, RsS, [41 25 38]);
    
    RsAll = [RsF; RsB; RsS];
    fsAll = [fsF; fsB; fsS];
@@ -52,7 +53,7 @@ function visualizeFeatures(RsF, RsB, RsS, fIndices)
 
 end
 
-function [Rs, fileNames] = getClassFeatures(dir, extension, F)
+function [Rs, fileNames] = getClassFeatures(dir, extension, F, featureModes)
 
     Rs = [];
     fileNames = [];
@@ -60,18 +61,39 @@ function [Rs, fileNames] = getClassFeatures(dir, extension, F)
     for k = 1:30
         fileName = strcat('texturesimages/', dir, '/', dir, '_', int2str(k) , extension);
         
-        I = imread(fileName);
-        I = im2double(I);
+        Ior = imread(fileName);
+        I = im2double(Ior);
         I = rgb2gray(I);
         
         R = getResponses(I, F);
-        Rm = getResponseMeans(R);
-        Rsd = getResponseSd(R);
-        Rmin = getResponseMin(R);
-        Rmax = getResponseMax(R);
-        Rmed = getResponseMedian(R);
-        
-        newR = [Rm' Rsd' Rmin' Rmax' Rmed'];
+        newR = [];
+        if featureModes(1) == 1
+            Rm = getResponseMeans(R);
+            newR = [newR Rm'];
+        end
+        if featureModes(2) == 1
+            Rsd = getResponseSd(R);
+            newR = [newR Rsd'];
+        end
+        if featureModes(3) == 1
+             Rmin = getResponseMin(R);
+             newR = [newR Rmin'];
+        end
+        if featureModes(4) == 1
+            Rmax = getResponseMax(R);
+            newR = [newR Rmax'];
+        end
+        if featureModes(5) == 1
+            Rmed = getResponseMedian(R);
+            newR = [newR Rmed'];
+        end
+        if featureModes(6) == 1
+           mR = getMeanColorChannelValue(Ior, 1);
+           mG = getMeanColorChannelValue(Ior, 2);
+           mB = getMeanColorChannelValue(Ior, 3);
+           Rcol = [mR; mG; mB];
+           newR = [newR Rcol'];
+        end
         
         Rs = [Rs; newR];
         fileName = strcat(fileName, '                                                                .');
@@ -172,6 +194,11 @@ function Rmed = getResponseMedian(R)
         Rv = reshape(R(:,:,k), [1 numel(R(:,:,k))]);
         Rmed(k) = median(Rv);
     end
+end
+
+function cm = getMeanColorChannelValue(I, channel)
+    Iv = reshape(I(:,:,channel), [1, numel(I(:,:,channel))]);
+    cm = mean(Iv);
 end
 
 function showHorVerHistograms(F)

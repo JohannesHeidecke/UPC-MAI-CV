@@ -1,0 +1,12 @@
+\section{Source code}
+
+Along with this report we provide the following source code:
+\begin{itemize}
+\item \texttt{play\_shot.m}: a function that, given a 4D matrix of frames (height, width, channels and time), a background and a frame rate, plays the video fraction showing at the same time the background and the foreground (absolute difference between the current frame and the background).
+\item \texttt{video\_segmentation.m}: performs all the steps of the first exercise. This is, it computes the differences of histograms between consecutive frame to infer at which points of the video there is a shot transitions; and then it extracts the background and foreground from each shot. It makes use of the \texttt{play\_shot.m} method described above to play the video and give graphical feedback. NOTE: the computation of the shot transitions can take a while if the video has to be read from beginning to end to compute the histogram differences. For this reason we provide the already cached history of differences at \texttt{history\_diff.mat}. Of course, the recomputation of the history of differences can be forced (check the comments in the code).
+\item \texttt{tag\_images.m}: an utility function that iterates over all the images inside \texttt{materialLab10}, shows them to the user and ask them by means of a dialog window whether it is an indoor scene (1) or not (0). Afterward the tags are stored in a file called \texttt{GroundTruth.m}
+\item \texttt{svm\_train\_and\_test.m}: loads the name and the tags from all the images from \texttt{GroundTruth.m}. Then it calculates the features of each image and stores them in a matrix \texttt{X}. Since this step can take a while, the matrix of features is stored in \texttt{Features-s42.m}. After this it splits the data into a training set and a test set. It uses the training set to build a linear SVM classifier. The classifier is used upon the test data and the accuracy and confusion matrix of the classifier are inferred from the results. The SVM model is stored in \texttt{SVMModel.m} so it can be later used in \texttt{demo\_svm.m}.
+\item \texttt{demo\_svm.m}: it uses the trained SVM model to show and classify all the images from the \texttt{materialLab10} folder, giving visual feedback to the user as a colored frame around the image (green if the guess is correct, red if it is not).
+\end{itemize}
+
+As always, we suggest the reader to read our code if they want be aware of all the details.

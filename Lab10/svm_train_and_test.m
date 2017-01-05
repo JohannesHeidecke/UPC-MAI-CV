@@ -5,7 +5,9 @@ function svm_train_and_test()
 load GroundTruth.mat
 N = length(Y);
 
-rand('seed', 42); % do not change if loading X from Features-s42.mat
+% The images are ordered by time, with very similar images next to each
+% other, so mess them all a litle bit:
+rand('seed', 42); % do not change if loading X from Features-s42.mat!!
 Y = Y(randperm(length(Y)));
 
 train_Y = Y(1:100);
@@ -16,6 +18,8 @@ test_Y = cellfun(@str2num, {test_Y.tag})';
 
 %% Extract features from images
 
+% This can take a while. Set the if condition to zero to load the
+% attributes directly from a file.
 if 0
 
     X = [];

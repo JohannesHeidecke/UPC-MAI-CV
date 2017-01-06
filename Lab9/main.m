@@ -4,30 +4,105 @@ function main
    % visualizeFilters(F, 'jet');
    
    
-   I = imread('texturesimages/forest/forest_1.jpg');
+   % I = imread('texturesimages/forest/forest_9.jpg');
+   I = imread('texturesimages/buildings/buildings_2.jpg');
+   % imshow(I);
    I = im2double(I);
    I = rgb2gray(I);
    
    R = getResponses(I, F);
-   visualizeResponses(R, 'jet');
-
-   % showHorVerHistograms(F);
    
-   featureModes = [1 0 0 0 0 1];
+%    Rv1 = reshape(R, [12288 48]);
+%    figure;
+%    boxplot(Rv1);
+%    ylim([-0.4 0.4]);
+   
+
+%    I = imread('texturesimages/forest/forest_9.jpg');
+%    I = im2double(I);
+%    I = rgb2gray(I);
+%    R = getResponses(I, F);
+%    RmeanF9 = getResponseMeans(R)
+%    ls = 1:48;
+%    figure;
+%    plot(ls, RmeanF9, 'LineWidth', 4);
+%    hold on
+%    I = imread('texturesimages/buildings/buildings_2.jpg');
+%    I = im2double(I);
+%    I = rgb2gray(I);
+%    R = getResponses(I, F);
+%    RmeanB2= getResponseMeans(R);
+%    plot(ls, RmeanB2, 'LineWidth', 4);
+%    hlegend = legend('forest\_9 standard deviations', 'buildings\_2 standard deviations');
+%    set(hlegend, 'FontSize', 22);
+ 
+
+    % showHorVerHistograms(F);
+   
+%    featureModes = [0 0 0 0 0 1];
+%    [RsF fsF] = getClassFeatures('forest', '.jpg', F, featureModes);
+%    [RsB fsB] = getClassFeatures('buildings', '.jpg', F, featureModes);
+%    [RsS fsS] = getClassFeatures('sunset', '.jpg', F, featureModes);
+     
+%    visualizeFeatures(RsF, RsB, RsS, [1 17 45]);
+%    visualizeFeatures(RsF, RsB, RsS, [41 25]);
+%    visualizeFeatures(RsF, RsB, RsS, [41 25 38]);
+%    visualizeFeatures(RsF, RsB, RsS, [2 3]);
+   
+%    RsAll = [RsF; RsB; RsS];
+%    fsAll = [fsF; fsB; fsS];
+%    
+%    visualizeKNN(RsAll, fsAll, 9);
+%    visualizeKNN(RsAll, fsAll, 35);
+   
+   % evaluateFeatureModes(F);
+   
+end
+
+function evaluateFeatureModes(F)
+    featureModes = [1 0 0 0 0 1]
+    evaluateImageRetrieval(featureModes, F)
+    featureModes = [0 1 0 0 0 1]
+    evaluateImageRetrieval(featureModes, F)
+    featureModes = [0 0 1 0 0 1]
+    evaluateImageRetrieval(featureModes, F)
+    featureModes = [0 0 0 1 0 1]
+    evaluateImageRetrieval(featureModes, F)
+    featureModes = [0 0 0 0 1 1]
+    evaluateImageRetrieval(featureModes, F)
+    featureModes = [1 1 1 1 1 0]
+    evaluateImageRetrieval(featureModes, F)
+    featureModes = [1 1 1 1 1 1]
+    evaluateImageRetrieval(featureModes, F)
+
+end
+
+function acc =  evaluateImageRetrieval(featureModes, F)
+
+    true = 0;
+    false = 0;
+    
    [RsF fsF] = getClassFeatures('forest', '.jpg', F, featureModes);
    [RsB fsB] = getClassFeatures('buildings', '.jpg', F, featureModes);
    [RsS fsS] = getClassFeatures('sunset', '.jpg', F, featureModes);
-     
-   % visualizeFeatures(RsF, RsB, RsS, [1 17 45]);
-   % visualizeFeatures(RsF, RsB, RsS, [41 25]);
-   %visualizeFeatures(RsF, RsB, RsS, [41 25 38]);
    
    RsAll = [RsF; RsB; RsS];
    fsAll = [fsF; fsB; fsS];
-   
-   visualizeKNN(RsAll, fsAll, 9);
-   
-   
+   for i=1:size(RsAll, 1)
+       class = floor(i/30);
+       knn = getKNN(RsAll, RsAll(i, :));
+       for j=1:size(knn, 1)
+           kclass = floor(knn(j)/30);
+           if class == kclass
+               true = true + 1;
+           else
+               false = false + 1;
+           end
+       end
+   end
+    
+    acc = true / (true+false);
+
 end
 
 function visualizeFeatures(RsF, RsB, RsS, fIndices)
@@ -143,8 +218,10 @@ function visualizeResponses(R, mode)
         subplot(8,6,k);
         C = R(:,:,k);
         colormap(mode);
+        smallest
+        largest
         imagesc(C, [smallest largest]); % colorbar;
-        % imagesc(C);
+        % imagesc(C); colorbar;
     end
 end
 

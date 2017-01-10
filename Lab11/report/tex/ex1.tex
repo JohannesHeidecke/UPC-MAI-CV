@@ -136,9 +136,9 @@ In figure \ref{fig:effect-size-numSpatialX} we can see that setting \emph{numSpa
 
 {\bfseries (f) The SVM classification with homogeneous kernels is performed by the vl\_svmtrain function that needs the homogeneous kernel map obtained by the vl\_homkermap function. What are the parameters obtained after the training process? What dimension do they have? How do you apply them to obtain the score of the final classification?}
 
-The parameters obtained after the training process are the weight vector (the \emph{w}) and the offset (the \emph{b}). The score is obtained performing the inner product between the weights vector and the input transformed by the homogeneous kernel map (the \emph{psix} vector) and adding to that the offset.
+The parameters obtained after the training process are the weight vector (the \emph{w}) and the offset (the \emph{b}). The score is obtained performing the inner product between the weights vector and the input transformed by the homogeneous kernel map (the \emph{psix} vector) and adding to that the offset. This is done with a different \emph{w} and \emph{b} for each of the classes since we are performing a One vs All classification.
 
-The input data is the spatial histogram, which has a dimension of 1200 ($ 300 \mathrm{words} \times 4 \mathrm{sectors} $). However the transform maps the data into a higher dimensional space. The \emph{psix} vector has a dimension of 3600. The dimensions of the weight vector \emph{w} are consistent with this (i.e. also a vector with 1200 elements).
+The input data is the spatial histogram, which has a dimension of 1200 ($ 300 \mathrm{words} \times 4 \mathrm{sectors} $). However the transform maps the data into a higher dimensional space. The \emph{psix} vector has a dimension of 3600. The dimensions of the weight vector \emph{w} are consistent with this (i.e. also a vector with 3600 rows). Since we are working with 5 classes, we have 5 columns for \emph{w} and 5 for \emph{b}.
 
 \subsection{Robustness against image transformations}
 

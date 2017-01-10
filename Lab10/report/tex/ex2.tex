@@ -22,7 +22,7 @@ The relevant code for this strategy is located at \texttt{tag\_images.m}, \textt
 \label{tab:confusion-matrix}
 \end{table}
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{./img/ex2/indoor-nailed.png}
@@ -51,3 +51,27 @@ The relevant code for this strategy is located at \texttt{tag\_images.m}, \textt
 \caption{Some examples of correct and incorrect guesses with our SVM classifier}
 \label{fig:svm-graphical-results}
 \end{figure}
+
+\subsection{Texture Based Approach}
+
+To compare with the results, we also implemented a classification approach based on texture features from the LM filter bank as in lab 9. For all training images, we use standard deviation to aggregate the filter responses of all images and combine them with mean values of the color channels. To classify a new image, we construct its feature vector and pass it to a knn-search algorithm that returns the k nearest neighbors of the image in the feature space. The algorith then looks at the labels of these neighbors and decides based on majority, if the image should be classified as indoor or outdoor. Besides choosing the right features to represent the textures (we opted for taking the best results from lab 9), the parameter $k$ has to be tuned. Our experiment shows in figure \ref{fig:kparam} that a relatively high $k$ of 81 yields the best accuracy of $59,83\%$. The corresponding confusion matrix is depicted in \ref{tab:confusion-matrix2}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.6\textwidth]{./img/ex2/k-param}
+\caption{Accuracy values for different choices of k}
+\label{fig:kparam}
+\end{figure}
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{l|rr}
+\textbf{Guess{\textbackslash}Truth} & \textbf{Indoor} & \textbf{Outdoor} \\ \hline
+\textbf{Indoor} & 32 & 21 \\
+\textbf{Outdoor} & 26 & 38 \\
+\end{tabular}
+\caption{Confusion matrix of the texture classifier}
+\label{tab:confusion-matrix2}
+\end{table}
+
+The obtained best accuracy is below the one using the SVM.

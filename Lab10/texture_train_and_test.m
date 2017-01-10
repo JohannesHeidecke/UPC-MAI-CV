@@ -54,6 +54,7 @@ ks =[];
 accs = [];
 bestAcc = 0;
 bestK = 0;
+bestConfusion = 0;
 for k=3:2:97
     test_Y_ = zeros(size(test_Y));
     for i = 1:length(test_Y)
@@ -74,13 +75,16 @@ for k=3:2:97
     if Acc > bestAcc
         bestAcc = Acc;
         bestK = k;
+        bestConfusion = Confusion;
     end
 end
 
 figure;
 plot(ks, accs);
+bestConfusion
 bestAcc
 bestK
+
 
 end
 

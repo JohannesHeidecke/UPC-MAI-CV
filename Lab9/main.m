@@ -1,59 +1,59 @@
 function main
 
    F = getFilters();
-   % visualizeFilters(F, 'jet');
+   visualizeFilters(F, 'jet');
    
    
-   % I = imread('texturesimages/forest/forest_9.jpg');
-   I = imread('texturesimages/buildings/buildings_2.jpg');
-   % imshow(I);
+   I = imread('texturesimages/forest/forest_9.jpg');
+   % I = imread('texturesimages/buildings/buildings_2.jpg');
+   imshow(I);
    I = im2double(I);
    I = rgb2gray(I);
    
    R = getResponses(I, F);
    
-%    Rv1 = reshape(R, [12288 48]);
-%    figure;
-%    boxplot(Rv1);
-%    ylim([-0.4 0.4]);
+   Rv1 = reshape(R, [12288 48]);
+   figure;
+   boxplot(Rv1);
+   ylim([-0.4 0.4]);
    
 
-%    I = imread('texturesimages/forest/forest_9.jpg');
-%    I = im2double(I);
-%    I = rgb2gray(I);
-%    R = getResponses(I, F);
-%    RmeanF9 = getResponseMeans(R)
-%    ls = 1:48;
-%    figure;
-%    plot(ls, RmeanF9, 'LineWidth', 4);
-%    hold on
-%    I = imread('texturesimages/buildings/buildings_2.jpg');
-%    I = im2double(I);
-%    I = rgb2gray(I);
-%    R = getResponses(I, F);
-%    RmeanB2= getResponseMeans(R);
-%    plot(ls, RmeanB2, 'LineWidth', 4);
-%    hlegend = legend('forest\_9 standard deviations', 'buildings\_2 standard deviations');
-%    set(hlegend, 'FontSize', 22);
+   I = imread('texturesimages/forest/forest_9.jpg');
+   I = im2double(I);
+   I = rgb2gray(I);
+   R = getResponses(I, F);
+   RmeanF9 = getResponseMeans(R);
+   ls = 1:48;
+   figure;
+   plot(ls, RmeanF9, 'LineWidth', 4);
+   hold on
+   I = imread('texturesimages/buildings/buildings_2.jpg');
+   I = im2double(I);
+   I = rgb2gray(I);
+   R = getResponses(I, F);
+   RmeanB2= getResponseMeans(R);
+   plot(ls, RmeanB2, 'LineWidth', 4);
+   hlegend = legend('forest\_9 standard deviations', 'buildings\_2 standard deviations');
+   set(hlegend, 'FontSize', 22);
  
 
-    % showHorVerHistograms(F);
+    showHorVerHistograms(F);
    
-%    featureModes = [0 0 0 0 0 1];
-%    [RsF fsF] = getClassFeatures('forest', '.jpg', F, featureModes);
-%    [RsB fsB] = getClassFeatures('buildings', '.jpg', F, featureModes);
-%    [RsS fsS] = getClassFeatures('sunset', '.jpg', F, featureModes);
+   featureModes = [0 1 0 0 0 1];
+   [RsF fsF] = getClassFeatures('forest', '.jpg', F, featureModes);
+   [RsB fsB] = getClassFeatures('buildings', '.jpg', F, featureModes);
+   [RsS fsS] = getClassFeatures('sunset', '.jpg', F, featureModes);
      
-%    visualizeFeatures(RsF, RsB, RsS, [1 17 45]);
-%    visualizeFeatures(RsF, RsB, RsS, [41 25]);
-%    visualizeFeatures(RsF, RsB, RsS, [41 25 38]);
-%    visualizeFeatures(RsF, RsB, RsS, [2 3]);
+   visualizeFeatures(RsF, RsB, RsS, [1 17 45]);
+   visualizeFeatures(RsF, RsB, RsS, [41 25]);
+   visualizeFeatures(RsF, RsB, RsS, [41 25 38]);
+   visualizeFeatures(RsF, RsB, RsS, [2 3]);
    
-%    RsAll = [RsF; RsB; RsS];
-%    fsAll = [fsF; fsB; fsS];
-%    
-%    visualizeKNN(RsAll, fsAll, 9);
-%    visualizeKNN(RsAll, fsAll, 35);
+   RsAll = [RsF; RsB; RsS];
+   fsAll = [fsF; fsB; fsS];
+   
+   visualizeKNN(RsAll, fsAll, 9);
+   visualizeKNN(RsAll, fsAll, 35);
    
    % evaluateFeatureModes(F);
    

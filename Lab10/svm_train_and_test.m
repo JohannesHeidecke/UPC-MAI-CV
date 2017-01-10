@@ -16,6 +16,7 @@ train_Y = cellfun(@str2num, {train_Y.tag})';
 test_Y = Y(101:end);
 test_Y = cellfun(@str2num, {test_Y.tag})';
 
+
 %% Extract features from images
 
 % This can take a while. Set the if condition to zero to load the
